@@ -9,6 +9,8 @@
 
 **Health monitoring that lives on board and never waits for Earth.**
 
+Built by **Team ChronoStrider** for the NASA Space Apps Challenge 2026
+
 [![NASA Space Apps 2026](https://img.shields.io/badge/NASA%20Space%20Apps-2026-0B3D91?style=flat-square)](https://www.spaceappschallenge.org/2026/challenges/health-monitoring-software/)
 [![Python](https://img.shields.io/badge/Python-3.13-3776AB?style=flat-square&logo=python&logoColor=white)](engine/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-engine-009688?style=flat-square&logo=fastapi&logoColor=white)](engine/)
@@ -288,6 +290,8 @@ uv run --no-project python -I scripts/fetch/donki.py      # solar particle event
 ---
 
 ## Team ChronoStrider
+
+<img src="web/public/chronostrider logo.png" alt="ChronoStrider" height="64" />
 
 | | Role |
 |---|---|
