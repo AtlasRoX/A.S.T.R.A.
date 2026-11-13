@@ -147,7 +147,8 @@ def create_app(db_path: str = DB_PATH) -> FastAPI:
         return JSONResponse(status_code=exc.status, content={"detail": exc.message})
 
     # ---------------------------------------------------------------- routes
-    @app.get("/health")
+    # HEAD too: uptime monitors (e.g. UptimeRobot) check with HEAD requests.
+    @app.api_route("/health", methods=["GET", "HEAD"])
     def health() -> dict[str, Any]:
         return {"ok": True, "service": "astra-core", "clock": engine.clock()}
 
