@@ -291,7 +291,10 @@ uv run --no-project python -I scripts/fetch/donki.py      # solar particle event
 
 ## Team ChronoStrider
 
-<img src="web/public/chronostrider%20logo.png" alt="ChronoStrider" height="64" />
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/brand/chronostrider-dark.png" />
+  <img src="docs/brand/chronostrider-light.png" alt="ChronoStrider" height="64" />
+</picture>
 
 | | Role |
 |---|---|
