@@ -1,0 +1,177 @@
+/* Styled dropdown: same surface, radius and row style as the header menus. */
+.wrap {
+  position: relative;
+  min-width: 0;
+}
+
+.trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  text-align: left;
+  color: var(--text);
+  background: var(--surface-2);
+  /* --border-3 like the other fields: the edge needs 3:1 to be found (--border-2 is 1.3-1.5:1). */
+  border: 1px solid var(--border-3);
+  border-radius: var(--r-md);
+  cursor: pointer;
+  font: inherit;
+  transition:
+    border-color 0.15s var(--ease),
+    background 0.15s var(--ease);
+}
+.trigger:hover:not(:disabled) {
+  border-color: var(--text-3);
+}
+.trigger[aria-expanded='true'],
+.trigger:focus-visible {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+.trigger:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.md {
+  min-height: 48px;
+  padding: 6px 12px;
+  font-size: 0.9375rem;
+}
+.sm {
+  min-height: 36px;
+  padding: 4px 10px;
+  font-size: 0.8125rem;
+  gap: 8px;
+}
+
+.value {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+.label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+}
+.value small {
+  font-size: 0.75rem;
+  color: var(--text-3);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.leading {
+  display: inline-flex;
+  flex: none;
+  color: var(--text-3);
+}
+.chevron {
+  flex: none;
+  color: var(--text-3);
+  transition: transform 0.15s var(--ease);
+}
+.trigger[aria-expanded='true'] .chevron {
+  transform: rotate(180deg);
+}
+
+.menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  /* Above the bottom nav (40) and the Ask button (70), which would otherwise cover its last rows. */
+  z-index: 75;
+  max-width: min(420px, calc(100vw - 24px));
+  max-height: min(60vh, 360px);
+  overflow: auto;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  border: 1px solid var(--border-2);
+  box-shadow: var(--shadow-2);
+  outline: none;
+  overscroll-behavior: contain;
+}
+.menu.up {
+  top: auto;
+  bottom: calc(100% + 6px);
+}
+/* Trigger near the right edge: grow leftward so the menu stays on screen. */
+.menu.end {
+  left: auto;
+  right: 0;
+}
+/* Phones: a bottom sheet across the screen. */
+.menu.sheet {
+  position: fixed;
+  top: auto;
+  left: 12px;
+  right: 12px;
+  bottom: calc(12px + env(safe-area-inset-bottom));
+  max-width: none;
+  max-height: 60dvh;
+}
+.groupHead {
+  padding: 10px 10px 4px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  user-select: none;
+}
+.option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 40px;
+  padding: 6px 10px;
+  border-radius: var(--r-md);
+  font-size: 0.875rem;
+  color: var(--text);
+  cursor: pointer;
+  user-select: none;
+}
+.option .label {
+  font-weight: 500;
+}
+.option.selected .label {
+  font-weight: 600;
+}
+.option.active {
+  background: var(--surface-2);
+}
+.check {
+  margin-left: auto;
+  flex: none;
+  color: var(--accent);
+}
+.tag {
+  flex: none;
+  padding: 1px 6px;
+  border-radius: 99px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+/* Touch targets: 44px on touch / narrow screens, like the other controls. */
+@media (pointer: coarse), (max-width: 1023px) {
+  .sm,
+  .option {
+    min-height: var(--target);
+  }
+}

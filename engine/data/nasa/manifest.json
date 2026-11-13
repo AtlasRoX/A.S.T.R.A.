@@ -1,0 +1,295 @@
+{
+  "version": 1,
+  "updated": "2026-11-13",
+  "note": "Every NASA number ASTRA shows comes from a fixture file listed here. The engine never makes a network call: the scripts in scripts/fetch/ download these files on a developer machine and the results are committed here. See docs/nasa-data-decisions.md for how each entry was obtained and what still needs checking.",
+  "sources": [
+    {
+      "id": "horizons-mars-lt",
+      "agency": "NASA/JPL",
+      "title": "Earth-Mars observer range and one-way light time",
+      "url": "https://ssd.jpl.nasa.gov/horizons/",
+      "role": "context",
+      "hazards": [
+        "D"
+      ],
+      "targets": [
+        "env:transit",
+        "env:mars"
+      ],
+      "files": [
+        "horizons/mars_lt.json"
+      ],
+      "fetched": "2026-11-09",
+      "license": "Public domain (US Government work)",
+      "status": "ready",
+      "slot": null,
+      "note": "JPL Horizons observer table for Mars (COMMAND '499') seen from the Earth geocentre (CENTER '500@399'), daily steps from 2026-11-12 to 2028-05-05, quantities 20 (range, AU), 21 (one-way light time, min) and 23 (Sun-Observer-Target elongation, deg). Exact request URL: https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27499%27&CENTER=%27500%40399%27&EPHEM_TYPE=%27OBSERVER%27&START_TIME=%272026-11-12%27&STOP_TIME=%272028-05-05%27&STEP_SIZE=%271d%27&QUANTITIES=%2720%2C21%2C23%27&CSV_FORMAT=%27NO%27&EXTRA_PREC=%27YES%27. 541 rows (covers the spring-2028 solar conjunction); light time runs from 338.3 s to 1203.4 s over the window."
+    },
+    {
+      "id": "osdr-eda-iss",
+      "agency": "NASA Open Science Data Repository",
+      "title": "ISS cabin air quality and crew radiation dose (Rodent Research 7)",
+      "url": "https://visualization.osdr.nasa.gov/eda/",
+      "role": "context",
+      "hazards": [
+        "E",
+        "R"
+      ],
+      "targets": [
+        "env:station"
+      ],
+      "files": [
+        "osdr_eda/iss_cabin.json",
+        "osdr_eda/iss_dose.json"
+      ],
+      "fetched": "2026-11-09",
+      "license": "Public domain (US Government work)",
+      "status": "ready",
+      "slot": null,
+      "note": "EDA mission RR-7 (2018-06-29 to 2018-09-18), the longest continuous cabin series in the EDA. Endpoints: /eda/api/missions/RR-7/co2/, /temperature/, /humidity/, /radiation_data/. UNIT CONVERSION: the EDA publishes CO2 in ppm and does not publish the cabin pressure, so we convert with the standard atmospheric pressure of 760 mmHg (mmHg = ppm / 1e6 * 760). TODO(verify): the ISS cabin actually runs near 14.5 psia (~735 mmHg), which would make the converted values about 3% lower; the EDA does not publish the cabin pressure, so 760 mmHg is used and recorded here. DATA CLEANING: 1534 of 21948 CO2 readings above 2x the series median were dropped as sensor spikes (the raw series contains readings up to 9000 ppm); the series was then averaged down to one reading per hour (1720 rows) to stay inside the 500 KB fixture budget. The first 124 hourly rows (to 2018-07-06) are a constant 200 ppm sensor fill, far below outdoor air (about 420 ppm); the engine and the simulator skip them."
+    },
+    {
+      "id": "osdr-i4-labs",
+      "agency": "NASA Open Science Data Repository",
+      "title": "Inspiration4 astronaut blood and urine measurements",
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-575",
+      "role": "evidence",
+      "hazards": [
+        "G",
+        "E"
+      ],
+      "targets": [
+        "inspiration4"
+      ],
+      "files": [
+        "osdr_i4/labs.json"
+      ],
+      "fetched": "2026-11-09",
+      "license": "Public domain (US Government work)",
+      "status": "ready",
+      "slot": null,
+      "note": "WHICH STUDY HOLDS WHAT: OSD-575 holds the comprehensive metabolic panel (Quest Diagnostics CMP TRANSFORMED CSV: glucose, creatinine, sodium, potassium, ALT, calcium); OSD-569 holds the complete blood count (CBC TRANSFORMED CSV: white blood cells, haemoglobin, platelets, neutrophils, lymphocytes, hematocrit). Both were downloadable from https://osdr.nasa.gov/geode-py/ws/studies/{study}/download?source=datamanager&file={file}. 336 values from four real crew members (C001-C004) across seven timepoints (L-92, L-44, L-3, R+1, R+45, R+82, R+194 days relative to launch). Reference ranges are the dataset's own Quest Diagnostics ranges, carried through unchanged. Note: the CBC CSV reports haemoglobin as a percentage in this dataset, so the grams-per-decilitre columns are used instead."
+    },
+    {
+      "id": "donki-sep",
+      "agency": "NASA CCMC",
+      "title": "DONKI solar particle events (September-October 2021)",
+      "url": "https://ccmc.gsfc.nasa.gov/DONKI/",
+      "role": "replay",
+      "hazards": [
+        "R"
+      ],
+      "targets": [
+        "replay:solar"
+      ],
+      "files": [
+        "donki/sep.json",
+        "donki/replay.json",
+        "donki/flr.json"
+      ],
+      "fetched": "2026-11-09",
+      "license": "Public domain (US Government work)",
+      "status": "ready",
+      "slot": null,
+      "note": "Fetched from CCMC's DONKI API (https://ccmc.gsfc.nasa.gov/DONKI-API/get/SEP and /FLR), no key needed, for 2021-10-01 to 2021-11-30: 11 solar particle events and 23 flares. The old kauai.ccmc.gsfc.nasa.gov/DONKI/WS/ hosts time out from our network and api.nasa.gov's shared DEMO_KEY is rate-limited (HTTP 429). CCMC answers HTTP 403 to a User-Agent containing an e-mail address, so the fetch scripts send a plain one. ASTRA replays sepID 2021-10-28T16:35:00-SEP-001, GOES-P's >100 MeV detection of the 28 Oct 2021 event (the first ground-level enhancement of solar cycle 25). The event time, instrument and link are real; the replay dose (10 mSv over 24 h unsheltered), the 10-minute shelter delay and the 0.25 shelter factor in donki/replay.json are illustrative ASTRA numbers, not DONKI measurements."
+    },
+    {
+      "id": "std3001v1",
+      "agency": "NASA",
+      "title": "NASA-STD-3001 Volume 1: Crew Health (Rev C)",
+      "url": "https://www.nasa.gov/reference/nasa-std-3001/",
+      "role": "threshold",
+      "hazards": [
+        "R",
+        "I",
+        "D",
+        "G",
+        "E"
+      ],
+      "targets": [
+        "rule:career_limit_msv",
+        "metric:hr",
+        "metric:bp",
+        "metric:spo2",
+        "metric:temp",
+        "metric:glucose",
+        "metric:hydration",
+        "metric:mass",
+        "metric:nutrition",
+        "metric:vision"
+      ],
+      "files": [],
+      "fetched": "2026-11-09",
+      "license": "Public domain (US Government work)",
+      "status": "ready",
+      "slot": null,
+      "note": "The career dose limit comes from requirement [V1 4030] in section 4.8.2 (page 39): 'An individual crewmember's total career effective radiation dose due to spaceflight radiation exposure shall be less than 600 mSv.' That is the 600 mSv limit ASTRA shows. PDF: https://www.nasa.gov/reference/nasa-std-3001/nasa-std-3001-vol-1-rev-c-with-signature.pdf"
+    },
+    {
+      "id": "std3001v2",
+      "agency": "NASA",
+      "title": "NASA-STD-3001 Volume 2: Human Factors, Habitability and Environmental Controls",
+      "url": "https://www.nasa.gov/reference/nasa-std-3001/",
+      "role": "threshold",
+      "hazards": [
+        "E"
+      ],
+      "targets": [
+        "rule:co2_1h_limit",
+        "metric:spo2",
+        "metric:resp"
+      ],
+      "files": [],
+      "fetched": "2026-11-09",
+      "license": "Public domain (US Government work)",
+      "status": "ready",
+      "slot": null,
+      "note": "The one-hour CO2 limit comes from requirement [V2 6004] in section 6.2.1.3 (page 53): 'The system shall limit the average one-hour CO2 partial pressure (ppCO2) in the habitable volume to no more than 3 mmHg.' That is the 3.0 mmHg Act threshold ASTRA shows for cabin CO2. PDF: https://www.nasa.gov/reference/nasa-std-3001/nasa-std-3001-vol-2.pdf"
+    },
+    {
+      "id": "ochmo-tb004",
+      "agency": "NASA Office of Chief Health and Medical Officers",
+      "title": "Technical Brief: Carbon Dioxide (OCHMO-TB-004)",
+      "url": "https://www.nasa.gov/ochmo/",
+      "role": "threshold",
+      "hazards": [
+        "E"
+      ],
+      "targets": [
+        "rule:co2_7d_limit"
+      ],
+      "files": [],
+      "fetched": "2026-11-09",
+      "license": "Public domain (US Government work)",
+      "status": "ready",
+      "slot": null,
+      "note": "The 7-day CO2 threshold comes from page 5 of the technical brief: 'To keep the risk of headache below 1%, average 7-day CO2 needs to be maintained below 2.5 mmHg (current ISS range: 1 to 9 mmHg; 3001 standard requires <3 mmHg).' That is the 2.5 mmHg Watch threshold ASTRA shows. Page 4 also records that headaches appear at 2.8-4.5 mmHg."
+    },
+    {
+      "id": "msl-rad",
+      "agency": "NASA/JPL (published in Science)",
+      "title": "MSL/RAD measured dose rate in transit and on the Martian surface",
+      "url": "https://doi.org/10.1126/science.1235989",
+      "role": "threshold",
+      "hazards": [
+        "R"
+      ],
+      "targets": [
+        "env:transit",
+        "env:mars"
+      ],
+      "files": [],
+      "fetched": "2026-11-09",
+      "license": "Publisher copyright (cited, not redistributed)",
+      "status": "ready",
+      "slot": null,
+      "note": "Transit 1.84 mSv/day: Zeitlin et al., 'Measurements of Energetic Particle Radiation in Transit to Mars on the Mars Science Laboratory', Science 340(6136):1080-1084, 2013, doi 10.1126/science.1235989. Surface 0.64 mSv/day: Hassler et al., 'Mars' Surface Radiation Environment Measured with the Mars Science Laboratory's Curiosity Rover', Science 343(6176), 2014, doi 10.1126/science.1244797. These are the dose rates ASTRA shows for the transit and Mars surface environments."
+    },
+    {
+      "id": "hrp-roadmap",
+      "agency": "NASA Human Research Program",
+      "title": "NASA Human Research Roadmap",
+      "url": "https://www.nasa.gov/hrp/roadmap/",
+      "role": "evidence",
+      "hazards": [
+        "R",
+        "I",
+        "D",
+        "G",
+        "E"
+      ],
+      "targets": [
+        "hazard:R",
+        "hazard:I",
+        "hazard:D",
+        "hazard:G",
+        "hazard:E"
+      ],
+      "files": [],
+      "fetched": "2026-11-09",
+      "license": "Public domain (US Government work)",
+      "status": "ready",
+      "slot": null,
+      "note": "The evidence behind each of the five hazards and their countermeasures: Radiation Risk 96, Adverse Cognitive or Behavioral Changes Risk 99, Sleep Loss Risk 100, Inadequate Cooperation Risk 101, SANS Risk 105, Bone Fracture Risk 77, Cardiovascular Adaptations Risk 179, Renal Stone Formation Risk 81, Host-Microorganism Interactions Risk 80, Celestial Dust Exposure Risk 82, EVA Operations Risk 84, Altered Immune Response Risk 85, Sensorimotor Risk 88, Medical Conditions Risk 95, Dynamic Loads Risk 167, Decompression Sickness Risk 168, Hypoxia Risk 173, Earth Independent Human-Systems Operations Risk 175, Inadequate Food and Nutrition Risk 176, Medications Risk 177."
+    },
+    {
+      "id": "slot-a",
+      "agency": "NASA Human Research Program",
+      "title": "Official resource: 5 Hazards of Human Spaceflight and Risks of Human Spaceflight",
+      "url": "https://www.nasa.gov/hrp/risks/",
+      "role": "evidence",
+      "hazards": [
+        "R",
+        "I",
+        "D",
+        "G",
+        "E"
+      ],
+      "targets": [
+        "hazard:R",
+        "hazard:I",
+        "hazard:D",
+        "hazard:G",
+        "hazard:E",
+        "resources:risk-map"
+      ],
+      "files": [
+        "official/hrp.json"
+      ],
+      "fetched": "2026-11-13",
+      "license": "Public domain (US Government work)",
+      "status": "ready",
+      "slot": "A",
+      "note": "Two of the five resources listed on the challenge's Resources tab on 13 Nov 2026: https://www.nasa.gov/hrp/hazards/ and https://www.nasa.gov/hrp/risks/. Neither is machine-readable, so the role is evidence. HOW IT WAS OBTAINED: each page and each of the five hazard pages it links to was read on 13 Nov 2026 and transcribed by hand into official/hrp.json: the five hazards with their page, video and the facts the pages state, and all 17 risks in the page's three categories with their own nasa.gov/reference URL. No number was added that the pages do not state. ASTRA'S PART: every risk carries an 'astra' block naming the metrics, body systems and screens that address it, and a coverage level (monitored / supported / partial). The engine test checks that every metric and body system named there exists. Gaps are named, not hidden: decompression sickness and landing loads are 'partial'. The existing HRP Roadmap citations are kept as the deeper reference (roadmap_source on each risk)."
+    },
+    {
+      "id": "slot-b",
+      "agency": "NASA Human Research Program",
+      "title": "Official resource: Ongoing HRP Research in Space",
+      "url": "https://www.nasa.gov/hrp/ongoing-hrp-research/",
+      "role": "evidence",
+      "hazards": [
+        "R",
+        "I",
+        "D",
+        "G",
+        "E"
+      ],
+      "targets": [
+        "resources:research"
+      ],
+      "files": [
+        "official/hrp_research.json"
+      ],
+      "fetched": "2026-11-13",
+      "license": "Public domain (US Government work)",
+      "status": "ready",
+      "slot": "B",
+      "note": "Third resource on the challenge's Resources tab. HOW IT WAS OBTAINED: the page and the 13 ongoing studies it lists (3 for Artemis II, 10 in low Earth orbit) were read on 13 Nov 2026 and transcribed by hand into official/hrp_research.json, each with its nasa.gov/reference URL and the page's own one-line summary. The pages give no results or numbers, so none are recorded. ASTRA'S PART: each study names the HRP risks it addresses (keys of official/hrp.json) and the ASTRA measurement that is its on-board counterpart, e.g. ARCHeR (sleep, activity, well-being) and Standard Measures (sleep, cognition, strength, balance, blood). Past investigations on the page were left out because they are not ongoing."
+    },
+    {
+      "id": "slot-c",
+      "agency": "Canadian Space Agency (CSA)",
+      "title": "Official resource: CSA, Monitoring Radiation for Astronaut Health and Why Do We Conduct Science Experiments in Space?",
+      "url": "https://www.asc-csa.gc.ca/eng/news/articles/2026/2026-02-26-monitoring-radiation-astronaut-health.asp",
+      "role": "evidence",
+      "hazards": [
+        "R",
+        "G"
+      ],
+      "targets": [
+        "hazard:R",
+        "hazard:G",
+        "resources:csa"
+      ],
+      "files": [
+        "official/csa.json"
+      ],
+      "fetched": "2026-11-13",
+      "license": "Government of Canada; cited and linked, not re-hosted (https://www.asc-csa.gc.ca/eng/terms.asp)",
+      "status": "ready",
+      "slot": "C",
+      "note": "The two Canadian Space Agency resources on the challenge's Resources tab. HOW IT WAS OBTAINED: both articles and the CSA pages they link for the instruments (MOSFET, EVARM, Radi-N2) and the infographic 'How does space affect the human body?' were read on 13 Nov 2026 and transcribed into official/csa.json, each fact with the URL it came from. KEY NUMBERS (as the CSA states them): neutrons are about 30% of ISS radiation; ISS crews receive about 150 microsieverts of neutron dose a day; spacewalk doses to skin, eyes and blood-forming organs measured about 6, 13 and 25 times nuclear-worker limits (EVARM, 2002-03); astronauts can lose up to 1.5% of bone mass a month against about 1% a year for adults over 50. These are shown as context and are NOT fed into ASTRA's dose model: the EDA station dose ASTRA uses already includes whatever its instrument sees, and adding a neutron share on top would double count. The space-agency disclaimer on the challenge page applies: NASA does not endorse non-US Government entities."
+    }
+  ]
+}

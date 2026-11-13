@@ -1,0 +1,214 @@
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 56px;
+  align-items: start;
+}
+.head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.h2 {
+  font-size: var(--t-section);
+  font-weight: 600;
+}
+.now {
+  font-family: var(--font-code);
+  font-size: 0.8125rem;
+  color: var(--text-3);
+}
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--border);
+}
+.row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 48px 14px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.time {
+  font-family: var(--font-code);
+  font-size: 0.8125rem;
+  color: var(--text-3);
+}
+.node {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--border-3, var(--text-3));
+  justify-self: center;
+}
+.done .node {
+  background: var(--ok);
+  border-color: var(--ok);
+}
+.due .node,
+.overdue .node {
+  border-color: var(--st);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--st) 18%, transparent);
+}
+.body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.body b {
+  font-weight: 600;
+}
+.done .body b {
+  font-weight: 500;
+  color: var(--text-2);
+}
+.body small {
+  font-size: 0.8125rem;
+  color: var(--text-3);
+}
+.tag {
+  margin-left: 8px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-3);
+}
+.end {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.state {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--st, var(--text-3));
+}
+.upcoming .state,
+.done .state {
+  font-weight: 400;
+  color: var(--text-3);
+}
+.side {
+  position: sticky;
+  top: calc(var(--topbar) + 24px);
+}
+.goalText {
+  margin: 6px 0 12px;
+  color: var(--text-2);
+}
+.goalBar {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--surface-3);
+  overflow: hidden;
+}
+.goalBar i {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  border-radius: inherit;
+}
+.crew {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+}
+.crew li {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.875rem;
+  color: var(--text-2);
+}
+.crew li.me {
+  color: var(--text);
+  font-weight: 500;
+}
+.count {
+  color: var(--text-3);
+}
+@media (max-width: 960px) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .side {
+    position: static;
+  }
+}
+@media (max-width: 520px) {
+  /* Rows run to three lines here: time and dot sit by the title, not in the middle of the row. */
+  .row {
+    grid-template-columns: 40px 12px minmax(0, 1fr);
+    align-items: start;
+  }
+  .time {
+    /* The title's line box (body size x 1.5), so the time centres on the title's first line. */
+    line-height: calc(var(--t-body) * 1.5);
+  }
+  .node {
+    margin-top: 6px;
+  }
+  .end {
+    grid-column: 3;
+  }
+  .nowLine {
+    grid-template-columns: 40px 1fr auto;
+  }
+}
+
+.nextUp {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-4);
+  border-radius: var(--r-md);
+  background: var(--surface-2);
+  border: 1px solid var(--st-line, var(--border));
+}
+.nextUp :global(.overline) {
+  color: var(--st, var(--text-3));
+}
+.nextUp > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.nextUp b {
+  font-size: var(--fs-body);
+  font-weight: 600;
+}
+.nextUp small {
+  color: var(--text-2);
+  font-size: var(--fs-micro);
+}
+.nowLine {
+  display: grid;
+  /* Same time column and gap as a row, so the line starts at the dots. */
+  grid-template-columns: 48px 1fr auto;
+  align-items: center;
+  gap: 14px;
+  list-style: none;
+  padding: var(--space-1) 0;
+  color: var(--accent);
+  font-size: var(--fs-micro);
+  font-weight: 600;
+}
+.nowLine i {
+  height: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+.nowLine em {
+  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}

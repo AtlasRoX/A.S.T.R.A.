@@ -1,0 +1,45 @@
+.tabs {
+  display: inline-flex;
+  gap: var(--space-1);
+  padding: var(--space-1);
+  margin-bottom: var(--space-5);
+  border-radius: var(--r-md);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  max-width: 100%;
+  overflow-x: auto;
+}
+.tab {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 var(--space-4);
+  border-radius: var(--r-sm);
+  font-size: var(--fs-label);
+  font-weight: 500;
+  color: var(--text-2);
+  white-space: nowrap;
+}
+.tab:hover {
+  color: var(--text);
+}
+.on {
+  background: var(--surface-3);
+  color: var(--text);
+}
+@media (pointer: coarse), (max-width: 1023px) {
+  .tab {
+    min-height: var(--target);
+  }
+}
+/* Phones: span the width and share it, with tighter padding, so all three labels fit without scrolling. */
+@media (max-width: 560px) {
+  .tabs {
+    display: flex;
+  }
+  .tab {
+    flex: 1 1 auto;
+    justify-content: center;
+    padding-inline: var(--space-3);
+  }
+}

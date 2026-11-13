@@ -1,0 +1,722 @@
+.crewGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 16px;
+}
+.crewCard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--surface);
+}
+.crewTop {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.crewName {
+  display: block;
+  font-weight: 600;
+  font-size: 15.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.organDots {
+  display: flex;
+  gap: 6px;
+}
+.organDot {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  background: var(--st-soft);
+  color: var(--st);
+}
+.flags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.insight {
+  font-size: 13px;
+  color: var(--text-2);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.insight b {
+  color: var(--text);
+  font-weight: 600;
+}
+.crewFoot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border);
+}
+.commsLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(360px, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+.link {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0 4px;
+}
+.node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: var(--accent);
+  width: 96px;
+  text-align: center;
+}
+.node small {
+  font-size: 0.75rem;
+  color: var(--text-3);
+  line-height: 1.2;
+}
+.track {
+  position: relative;
+  height: 40px;
+}
+.track svg {
+  width: 100%;
+  height: 100%;
+}
+.trackPath {
+  fill: none;
+  stroke: var(--border-3);
+  stroke-width: 2;
+  stroke-dasharray: 4 6;
+  animation: flow 1.6s linear infinite;
+  vector-effect: non-scaling-stroke;
+}
+@keyframes flow {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+.packetDot {
+  position: absolute;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  transform: translate(-50%, calc(-50% + var(--lane, 0px)));
+  background: var(--accent);
+  box-shadow: 0 0 0 2px var(--surface), 0 0 0 5px var(--accent-soft);
+  transition: left 1s linear;
+}
+.hot {
+  background: var(--act);
+  box-shadow: 0 0 0 2px var(--surface), 0 0 0 5px var(--act-soft);
+}
+.linkStats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+.linkStats > div {
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.linkStats b {
+  font-size: 16px;
+  font-weight: 600;
+}
+.delaySource {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+.conjunction {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: var(--r-md);
+  border: 1px solid var(--watch-line);
+  background: var(--watch-soft);
+}
+.conjunctionAct {
+  border-color: var(--act-line);
+  background: var(--act-soft);
+}
+.conjunctionAct svg {
+  color: var(--act);
+}
+.conjunction svg {
+  color: var(--watch);
+  flex: none;
+  margin-top: 2px;
+}
+.conjunction b {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 600;
+}
+.conjunction span {
+  display: block;
+  font-size: 13px;
+  color: var(--text-2);
+  margin-top: 2px;
+}
+.packets {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+.packet {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 12px;
+  padding: 12px;
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+}
+.priority {
+  border-color: var(--act-line);
+}
+.pIcon {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.priority .pIcon {
+  background: var(--act-soft);
+  color: var(--act);
+}
+.pBody {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.pBody b {
+  font-weight: 600;
+  font-size: 14px;
+}
+.pBody small {
+  font-size: 12px;
+}
+.progress {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 8px;
+  font-size: 12.5px;
+}
+.reply {
+  margin-top: 8px;
+  padding: 10px 12px;
+  border-radius: 4px 14px 14px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  font-size: 13.5px;
+  color: var(--text-2);
+}
+.earlierBtn {
+  margin-top: 6px;
+  margin-left: -6px;
+}
+.composer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+.ladder {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+.ladder li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  align-items: start;
+}
+.ladder b {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+}
+.ladder small {
+  font-size: 12.5px;
+  color: var(--text-2);
+}
+.tier {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 13px;
+  background: var(--surface-3);
+}
+.ladder li:nth-child(1) .tier {
+  background: var(--ok-soft);
+  color: var(--ok);
+}
+.ladder li:nth-child(2) .tier {
+  background: var(--watch-soft);
+  color: var(--watch);
+}
+.ladder li:nth-child(3) .tier {
+  background: var(--act-soft);
+  color: var(--act);
+}
+@media (max-width: 1023px) {
+  .commsLayout {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 560px) {
+  .node {
+    width: 64px;
+  }
+  /* Phone: one stat per row, label left and value right, so "5 min 36 s" never breaks. */
+  .linkStats {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+  }
+  .linkStats > div {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px 12px;
+  }
+  .linkStats b {
+    font-size: 14px;
+    white-space: nowrap;
+  }
+}
+
+/* ---------- crew roster: one card per crew member ---------- */
+.roster {
+  list-style: none;
+  margin: 0 0 24px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+.member {
+  /* Head, stats and issue share row tracks with the other cards (subgrid), so the stats line up even when one
+     card's role wraps to a second line. */
+  display: grid;
+  grid-row: span 3;
+  grid-template-rows: subgrid;
+  gap: 14px;
+  padding: 16px;
+  border-radius: var(--r-lg, 14px);
+  border: 1px solid var(--border);
+  /* A wash of the member's overall status from the top-left corner. */
+  background:
+    radial-gradient(140% 90% at 0% 0%, var(--st-soft) 0%, transparent 50%),
+    var(--surface);
+}
+/* The crew member you are viewing as: accent outline so it is obvious at a glance. */
+.member.current {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+/* An Act member gets a red edge even when not selected. */
+.member:global(.st-act):not(.current) {
+  border-color: var(--act-line);
+}
+.memberHead {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+}
+.avatarRing {
+  display: grid;
+  place-items: center;
+  padding: 2px;
+  border-radius: 50%;
+  background: var(--st);
+}
+.avatarRing :global(.avatar) {
+  box-shadow: 0 0 0 2px var(--surface);
+}
+.memberName {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  color: inherit;
+  text-decoration: none;
+}
+.memberName:hover b {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+@media (pointer: coarse), (max-width: 1023px) {
+  .memberName {
+    justify-content: center;
+    min-height: var(--target);
+  }
+}
+/* "Profile ›" appears on hover/focus so the card stays calm but the link is discoverable. */
+.profileHint {
+  color: var(--accent);
+  opacity: 0;
+  transition: opacity 0.15s var(--ease);
+}
+.member:hover .profileHint,
+.memberName:focus-visible .profileHint {
+  opacity: 1;
+}
+@media (hover: none) {
+  .profileHint {
+    opacity: 1;
+  }
+}
+.memberName b {
+  font-weight: 600;
+  font-size: 0.9375rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.memberName small {
+  font-size: 0.8125rem;
+  color: var(--text-3);
+}
+.memberStats {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+.memberStats > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: var(--surface-2);
+  min-width: 0;
+}
+.memberStats dt {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.memberStats dd {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--st, var(--text));
+  font-variant-numeric: tabular-nums;
+}
+.memberStats dd span {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-3);
+}
+.miniMeter {
+  display: block;
+  height: 3px;
+  margin-top: 3px;
+  border-radius: 99px;
+  background: var(--surface-3);
+  overflow: hidden;
+}
+.miniMeter i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--accent);
+}
+.memberIssue {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.memberIssue p {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.memberIssue p i {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--st);
+  box-shadow: 0 0 0 3px var(--st-soft);
+  transform: translateY(-1px);
+}
+.flagChips {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+/* The checks link covers its whole stat tile, so the tap target is the tile, not the short "0/8". */
+.statLink {
+  position: relative;
+}
+.statLink a {
+  color: inherit;
+  text-decoration: none;
+}
+.statLink a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+.statLink a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.flagChips a {
+  color: inherit;
+  text-decoration: none;
+}
+.flagChips a:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.flagChips li {
+  padding: 2px 8px;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: var(--st-soft);
+  color: var(--st);
+}
+/* Touch: the chip link's tap area grows to the full target height around the chip without making the chip taller. */
+@media (pointer: coarse), (max-width: 1023px) {
+  .flagChips li {
+    position: relative;
+  }
+  .flagChips a::after {
+    content: '';
+    position: absolute;
+    inset: calc((100% - var(--target)) / 2) 0;
+  }
+}
+.side {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+@media (max-width: 1279px) {
+  .roster {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+/* Phone: a swipeable row of cards instead of four full-height cards before the queue. */
+@media (max-width: 640px) {
+  .roster {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 84%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    gap: 12px;
+    margin-inline: -16px;
+    padding: 2px 16px 4px;
+    scroll-padding-inline: 16px;
+  }
+  .roster::-webkit-scrollbar {
+    display: none;
+  }
+  .member {
+    scroll-snap-align: start;
+  }
+}
+
+/* ---------- Ship Sense: a shared cause behind several crew members' symptoms ---------- */
+.shipSense {
+  margin-bottom: 16px;
+}
+.shipFired {
+  border-color: color-mix(in srgb, var(--st) 45%, var(--border));
+  background:
+    radial-gradient(120% 140% at 0% 0%, color-mix(in srgb, var(--st) 12%, transparent) 0%, transparent 50%),
+    var(--surface);
+}
+.shipTag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.shipFired .shipTag {
+  color: var(--st);
+}
+.shipFlow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.4fr);
+  align-items: center;
+  gap: 16px;
+  margin: 4px 0 12px;
+}
+.shipSide {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+.shipLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-3);
+}
+.shipStatus {
+  color: var(--st);
+}
+.shipCrew {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.shipCrew li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.shipNone {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--text-2);
+}
+.shipArrow {
+  font-size: 1.5rem;
+  color: var(--text-3);
+}
+.shipRow {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8125rem;
+  color: var(--text-2);
+}
+.shipRow b {
+  font-size: 0.9375rem;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+.shipRow small {
+  font-size: 0.75rem;
+  color: var(--text-3);
+  white-space: nowrap;
+}
+.shipGauge {
+  position: relative;
+  height: 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 9%, transparent);
+}
+.shipGauge > i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: inherit;
+  background: var(--st, var(--accent));
+}
+/* The limit, as a tick on the track. */
+.shipGauge > b {
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  width: 2px;
+  border-radius: 1px;
+  background: var(--text-2);
+}
+.shipBody {
+  margin: 0 0 10px;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--text-2);
+}
+.shipActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 0 12px;
+  padding: 0;
+  list-style: none;
+}
+.shipActions li {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--st, var(--text));
+  background: var(--st-soft, var(--surface-2));
+}
+.shipFoot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  font-size: 0.75rem;
+  color: var(--text-3);
+}
+@media (max-width: 640px) {
+  .shipFlow {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .shipArrow {
+    transform: rotate(90deg);
+    justify-self: start;
+  }
+}

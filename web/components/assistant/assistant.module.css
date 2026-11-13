@@ -1,0 +1,790 @@
+/* ASTRA specialist: a small rounded launcher and a floating chat panel. */
+.fab {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 70;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  height: 46px;
+  padding: 0 18px 0 14px;
+  border-radius: 999px;
+  /* Dark theme: a raised dark pill, so it is easy to find without being the brightest thing on screen
+     (that is the Emergency button's job). */
+  border: 1px solid var(--border-3);
+  background: #232a33;
+  color: var(--text);
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 650;
+  letter-spacing: -0.005em;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.3),
+    0 10px 28px -10px rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+  transition:
+    transform 0.15s var(--ease),
+    box-shadow 0.15s var(--ease),
+    background 0.15s var(--ease),
+    border-color 0.15s var(--ease);
+}
+/* Light theme: the near-black pill, which already stands out calmly on a light page. */
+:global([data-theme='light']) .fab {
+  border-color: transparent;
+  background: var(--primary);
+  color: var(--on-primary);
+}
+/* The real ASTRA mark, at its own aspect ratio (188 x 128). */
+.fabLogo {
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+}
+.fabLogo img {
+  display: block;
+  width: 33px;
+  height: 22px;
+}
+.fab:hover {
+  transform: translateY(-1px);
+  background: #2b333d;
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border-3));
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.3),
+    0 14px 32px -10px rgba(0, 0, 0, 0.75);
+}
+:global([data-theme='light']) .fab:hover {
+  background: color-mix(in srgb, var(--primary) 88%, #fff);
+}
+.fab:active {
+  transform: translateY(0) scale(0.98);
+}
+/* Back once the panel has closed (and on first load): it fades and scales in as the panel shrinks away.
+   `backwards`, so the hover lift still works after it has played. */
+.fab:not([hidden]) {
+  animation: fabIn 0.26s var(--ease-out) 0.1s backwards;
+}
+@keyframes fabIn {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+}
+.fab:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .fab,
+  .fab:hover,
+  .fab:active {
+    transform: none;
+    transition: none;
+  }
+}
+
+.badge {
+  position: absolute;
+  top: -5px;
+  right: -4px;
+  display: grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--act);
+  color: var(--on-act);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  box-shadow: 0 0 0 2px var(--bg);
+}
+/* New rewards only (XP, level, badge): a calm accent dot, never the red alert count. */
+.badgeReward {
+  position: absolute;
+  top: -2px;
+  right: -1px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 2px var(--bg);
+}
+
+.panel {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  /* Under the top bar (50), so its menus (View as, location, settings) open over the panel instead of behind it;
+     above the mission strip (45) and the page. */
+  z-index: 48;
+  display: flex;
+  flex-direction: column;
+  width: min(420px, calc(100vw - 40px));
+  height: min(640px, calc(100dvh - 120px));
+  border-radius: 16px;
+  border: 1px solid var(--border-2);
+  background: var(--surface);
+  box-shadow: var(--shadow-2);
+  overflow: hidden;
+  /* Closed: after its first open the panel stays in the page (so the chat keeps its place), hidden and inert.
+     Floating, it grows out of the Ask ASTRA button in this corner and shrinks back into it. */
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(10px) scale(0.92);
+  transform-origin: 100% 100%;
+  transition:
+    opacity 0.16s var(--ease-in),
+    transform 0.2s var(--ease-in),
+    visibility 0s linear 0.2s;
+}
+.panel[data-open='true'] {
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.18s var(--ease-out),
+    transform 0.32s var(--ease-out),
+    visibility 0s;
+}
+/* Focus moves to the panel itself when it opens on Alerts; the opening is the cue, so no ring around it all. */
+.panel:focus-visible {
+  outline: none;
+}
+/* The first open creates the panel already open: start it from the closed look so that open animates too. */
+@starting-style {
+  .panel[data-open='true'] {
+    opacity: 0;
+    transform: translateY(10px) scale(0.92);
+  }
+}
+.head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 10px 12px 14px;
+  border-bottom: 1px solid var(--border);
+}
+.headText {
+  flex: 1;
+  min-width: 0;
+}
+.headText h2 {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+.headText p {
+  margin: 1px 0 0;
+  font-size: 0.75rem;
+  color: var(--text-3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.iconBtn {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--text-2);
+  cursor: pointer;
+}
+.iconBtn:hover {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.tabs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 10px;
+  border-bottom: 1px solid var(--border);
+}
+.tabs [role='tab'] {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 40px;
+  padding: 0 10px;
+  border: none;
+  background: transparent;
+  color: var(--text-3);
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.tabs [role='tab']:hover {
+  color: var(--text);
+}
+.tabs [role='tab'][aria-selected='true'] {
+  color: var(--text);
+}
+.tabs [role='tab'][aria-selected='true']::after {
+  content: '';
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: -1px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--accent);
+}
+.tabCount {
+  display: grid;
+  place-items: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--act);
+  color: var(--on-act);
+  font-size: var(--fs-micro);
+  font-variant-numeric: tabular-nums;
+}
+.clear {
+  margin-left: auto;
+  border: none;
+  background: transparent;
+  color: var(--text-3);
+  font: inherit;
+  font-size: 0.8125rem;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 8px;
+}
+.clear:hover {
+  color: var(--text);
+  background: var(--surface-2);
+}
+
+.list {
+  flex: 1;
+  scroll-padding-top: 12px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 14px;
+  overscroll-behavior: contain;
+}
+.empty p {
+  margin: 0 0 14px;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--text-2);
+}
+.suggestions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.suggestions button {
+  text-align: left;
+  padding: 9px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border-2);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 0.8125rem;
+  cursor: pointer;
+}
+.suggestions button:hover {
+  background: var(--surface-2);
+}
+.user {
+  align-self: flex-end;
+  max-width: 85%;
+  padding: 9px 12px;
+  border-radius: 14px 14px 4px 14px;
+  background: var(--accent);
+  color: var(--bg);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+.bot {
+  align-self: flex-start;
+  max-width: 100%;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+.bot p {
+  margin: 0 0 8px;
+}
+.bot ul {
+  margin: 0 0 8px;
+  padding-left: 18px;
+}
+.bot li {
+  margin: 2px 0;
+}
+.botError {
+  color: var(--text-2);
+}
+.typing {
+  display: inline-block;
+  width: 28px;
+  height: 8px;
+  background:
+    radial-gradient(circle, var(--text-3) 3px, transparent 3.5px) 0 50% / 10px 8px repeat-x;
+  animation: pulse 1s ease-in-out infinite;
+}
+@keyframes pulse {
+  50% {
+    opacity: 0.35;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .typing {
+    animation: none;
+  }
+}
+
+.form {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  margin: 0 12px;
+  padding: 8px 8px 8px 12px;
+  border-radius: 14px;
+  border: 1px solid var(--border-2);
+  background: var(--surface-2);
+}
+.form:focus-within {
+  border-color: var(--accent);
+}
+.form textarea {
+  flex: 1;
+  min-height: 24px;
+  max-height: 120px;
+  padding: 4px 0;
+  border: none;
+  outline: none;
+  resize: none;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  field-sizing: content;
+}
+.send {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  flex: none;
+  border-radius: 50%;
+  border: none;
+  background: var(--accent);
+  color: var(--bg);
+  cursor: pointer;
+}
+.send:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.disclaimer {
+  margin: 6px 0 10px;
+  padding-inline: 12px;
+  text-align: center;
+  text-wrap: balance;
+  font-size: var(--fs-micro);
+  color: var(--text-3);
+}
+
+/* Wide screens: a docked side panel under the header; the page narrows to make room (see globals.css).
+   From 1280px only: narrower screens keep the floating panel, so pages are not squeezed below their layouts. */
+@media (min-width: 1280px) {
+  .panel {
+    top: var(--topbar, 56px);
+    right: 0;
+    bottom: 0;
+    width: 400px;
+    height: auto;
+    border-radius: 0;
+    border: none;
+    border-left: 1px solid var(--border-2);
+    box-shadow: none;
+    /* Docked, it slides in from the right edge while the page narrows to make room, on the same curve. */
+    opacity: 1;
+    transform: translateX(100%);
+    transition:
+      transform var(--dock-out),
+      visibility 0s linear 0.24s;
+  }
+  .panel[data-open='true'] {
+    transform: none;
+    transition:
+      transform var(--dock-in),
+      visibility 0s;
+  }
+  @starting-style {
+    .panel[data-open='true'] {
+      opacity: 1;
+      transform: translateX(100%);
+    }
+  }
+}
+
+/* ---------- live components inside answers ---------- */
+.reading {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  margin: 1px 2px;
+  padding: 3px 9px;
+  border-radius: 8px;
+  border: 1px solid var(--st-line, var(--border-2));
+  background: var(--st-soft, var(--surface-2));
+  color: var(--text);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  text-decoration: none;
+  vertical-align: baseline;
+}
+.reading:hover {
+  border-color: var(--st, var(--border-3));
+}
+.readingLabel {
+  color: var(--text-2);
+}
+.reading b {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.reading b small {
+  font-weight: 500;
+  color: var(--text-2);
+}
+.readingStatus {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--st, var(--text-2));
+}
+.readingRow {
+  margin: 4px 0 8px;
+}
+.crewCard {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 6px 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border-2);
+  background: var(--surface-2);
+  color: var(--text);
+  text-decoration: none;
+}
+.crewCompact {
+  gap: 8px;
+  margin: 4px 0;
+  padding: 6px 10px;
+  border-radius: 10px;
+}
+.crewCompact .crewText b {
+  font-size: 0.8125rem;
+}
+.crewCard:hover {
+  border-color: var(--border-3);
+}
+.crewText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.35;
+}
+.crewText b {
+  font-size: 0.875rem;
+}
+.crewText small {
+  font-size: 0.75rem;
+  color: var(--text-3);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.crewStatus {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1.3;
+}
+.statusWord {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--st);
+}
+.crewStatus small {
+  font-size: var(--fs-micro);
+  color: var(--text-3);
+}
+.crewArrow {
+  color: var(--text-3);
+  flex: none;
+}
+.protocol {
+  margin: 6px 0 10px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--act-line);
+  background: var(--act-soft);
+}
+.protocol > b {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.875rem;
+  color: var(--act);
+}
+.protocol ol {
+  margin: 8px 0 0;
+  padding-left: 20px;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+.protocol li + li {
+  margin-top: 4px;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0 4px;
+}
+.action {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 32px;
+  padding: 0 10px 0 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border-2);
+  background: transparent;
+  color: var(--text);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.action:hover {
+  background: var(--surface-2);
+}
+.action svg {
+  color: var(--text-3);
+}
+.actionDanger {
+  border-color: transparent;
+  background: #991b1b;
+  color: #fff;
+  padding: 0 12px;
+}
+.actionDanger:hover {
+  background: #7f1d1d;
+}
+.actionDanger svg {
+  color: #fff;
+}
+
+/* ---------- alert log ---------- */
+.logHead {
+  margin: 0 0 6px;
+  font-size: 0.75rem;
+  color: var(--text-3);
+}
+.emptyLog {
+  margin: 12px 0;
+  font-size: 0.875rem;
+  color: var(--text-2);
+}
+.groupHead {
+  margin: 10px 0 4px;
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.notices {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.notice {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 10px;
+  padding: 12px 0;
+}
+.notice + .notice {
+  border-top: 1px solid var(--border);
+}
+.noticeNew .noticeTop b::before {
+  content: '';
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  vertical-align: 2px;
+}
+.noticeAvatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--surface-3);
+}
+.noticeBody {
+  min-width: 0;
+}
+.noticeTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+.noticeTop b {
+  font-size: 0.875rem;
+  line-height: 1.35;
+}
+.sev {
+  flex: none;
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  color: var(--st);
+  background: var(--st-soft);
+}
+.sevInfo {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+.sevReward {
+  color: var(--on-accent);
+  background: var(--accent);
+}
+.noticeBody p {
+  margin: 3px 0 4px;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--text-2);
+}
+.noticeMeta {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-3);
+  font-variant-numeric: tabular-nums;
+}
+.noticeActions {
+  display: flex;
+  gap: 12px;
+  margin-top: 6px;
+}
+.noticeActions button,
+.noticeActions a {
+  border: none;
+  background: none;
+  padding: 0;
+  color: var(--accent);
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+.noticeActions button:hover,
+.noticeActions a:hover {
+  text-decoration: underline;
+}
+
+/* Up to 1023px the bottom navigation shows: the launcher sits above it. */
+@media (max-width: 1023px) {
+  .fab {
+    bottom: calc(76px + env(safe-area-inset-bottom));
+  }
+}
+/* Tablet (768-1023px): the floating panel also sits above the bottom navigation, and is shorter by as much. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .panel {
+    bottom: calc(76px + env(safe-area-inset-bottom));
+    height: min(640px, calc(100dvh - 176px - env(safe-area-inset-bottom)));
+  }
+}
+
+/* Phone: a round launcher; the panel takes the whole screen. */
+@media (max-width: 767px) {
+  .fab {
+    right: 14px;
+    width: 46px;
+    padding: 0;
+    justify-content: center;
+  }
+  .fabLabel {
+    display: none;
+  }
+  .panel {
+    inset: 0;
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    border: none;
+    z-index: 80;
+    /* Phone: a full-screen sheet that slides up from the bottom and back down. */
+    opacity: 1;
+    transform: translateY(100%);
+    transition:
+      transform 0.26s var(--ease-in),
+      visibility 0s linear 0.26s;
+  }
+  .panel[data-open='true'] {
+    transform: none;
+    transition:
+      transform 0.38s var(--ease-out),
+      visibility 0s;
+  }
+  @starting-style {
+    .panel[data-open='true'] {
+      opacity: 1;
+      transform: translateY(100%);
+    }
+  }
+  .form {
+    margin-bottom: 4px;
+  }
+}
+
+/* Touch screens and narrow windows: every control in the panel is at least 44px (gloves, microgravity). */
+@media (pointer: coarse), (max-width: 1023px) {
+  .iconBtn,
+  .send {
+    width: var(--target);
+    height: var(--target);
+  }
+  .tabs [role='tab'],
+  .clear,
+  .action,
+  .suggestions button,
+  .crewCompact {
+    min-height: var(--target);
+  }
+  .noticeActions a,
+  .noticeActions button {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--target);
+  }
+}

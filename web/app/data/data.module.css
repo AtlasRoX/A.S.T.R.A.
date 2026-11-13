@@ -1,0 +1,279 @@
+.hero {
+  max-width: 760px;
+  margin-bottom: 28px;
+}
+.totals {
+  margin-top: 14px;
+  color: var(--text-2);
+  font-size: 14px;
+}
+.totals b {
+  color: var(--text);
+  font-weight: 600;
+}
+.section {
+  margin-bottom: 34px;
+}
+.h2 {
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0 0 6px;
+}
+.sub {
+  color: var(--text-2);
+  font-size: 14px;
+  margin: 0 0 14px;
+  max-width: 72ch;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
+  gap: 14px;
+}
+.card {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  scroll-margin-top: 90px;
+}
+.head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.role {
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 3px 8px;
+  border-radius: 99px;
+}
+.files {
+  font-size: var(--fs-micro);
+  color: var(--text-3);
+}
+.slot {
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--watch);
+  background: var(--watch-soft);
+  padding: 3px 8px;
+  border-radius: 99px;
+}
+.card h3 {
+  margin: 0;
+  font-size: 15.5px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.agency {
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--text-3);
+}
+.change {
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--text-2);
+  line-height: 1.5;
+}
+.more summary {
+  font-size: 12px;
+  color: var(--text-3);
+  cursor: pointer;
+  padding: 2px 0;
+}
+.more p {
+  margin: 6px 0 0;
+  font-size: 12.5px;
+  color: var(--text-3);
+  line-height: 1.55;
+}
+.meta {
+  margin-top: auto;
+  padding-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+  font-size: var(--fs-micro);
+  color: var(--text-3);
+}
+.link {
+  color: var(--accent);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.link:hover {
+  text-decoration: underline;
+}
+.pending {
+  border: 1px dashed var(--border-2);
+}
+.linkCard {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 20px;
+}
+/* Icons keep their size instead of shrinking to a sliver beside long text. */
+.linkCard > svg,
+.disclaimer > svg {
+  flex: none;
+}
+.linkCard h3 {
+  margin: 0 0 4px;
+  font-size: 16px;
+  font-weight: 600;
+}
+.linkCard p {
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--text-2);
+  line-height: 1.5;
+}
+.docs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+  gap: 12px;
+}
+.doc {
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  scroll-margin-top: 90px;
+}
+.docHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.kind {
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-3);
+}
+.year {
+  font-size: var(--fs-micro);
+  color: var(--text-3);
+}
+.doc h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.disclaimer {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+  color: var(--text-3);
+  font-size: 12.5px;
+  line-height: 1.55;
+  margin-top: 14px;
+}
+.disclaimer p {
+  margin: 0;
+}
+.disclaimer code {
+  font-family: ui-monospace, monospace;
+  font-size: var(--fs-micro);
+  color: var(--text-2);
+}
+
+/* Touch targets: 44px for primary controls on touch / narrow screens (docs/ux roadmap Phase 2). */
+@media (pointer: coarse), (max-width: 1023px) {
+  .link {
+    display: inline-block;
+    padding-block: 8px;
+  }
+  .more summary {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+}
+/* "How it was obtained": a +/– marker like the document groups (display:flex above drops the native one). */
+.more summary {
+  list-style: none;
+}
+.more summary::-webkit-details-marker {
+  display: none;
+}
+.more summary::after {
+  content: '+';
+  margin-left: 8px;
+  font-weight: 500;
+}
+.more[open] summary::after {
+  content: '–';
+}
+@media (max-width: 560px) {
+  .linkCard {
+    flex-wrap: wrap;
+  }
+  .linkCard > div {
+    flex: 1 1 200px;
+    min-width: 0;
+  }
+}
+
+.kindGroup {
+  margin-bottom: var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+}
+.kindGroup > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--fs-body);
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+  min-height: var(--target);
+}
+.kindGroup > summary::-webkit-details-marker {
+  display: none;
+}
+.kindGroup > summary::after {
+  content: '+';
+  margin-left: auto;
+  color: var(--text-3);
+  font-weight: 500;
+}
+.kindGroup[open] > summary::after {
+  content: '–';
+}
+.kindGroup .docs {
+  padding: 0 var(--space-4) var(--space-4);
+}
+.kindCount {
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  color: var(--text-2);
+  background: var(--surface-3);
+  padding: 2px 8px;
+  border-radius: 999px;
+}

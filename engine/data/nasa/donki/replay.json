@@ -1,0 +1,19 @@
+{
+  "shelter_delay_s": 600.0,
+  "shelter_factor": 0.25,
+  "events": [
+    {
+      "event_id": "2021-10-28T16:35:00-SEP-001",
+      "label": "Solar particle event of 28 Oct 2021 (replay of DONKI 2021-10-28T16:35:00-SEP-001)",
+      "event_time": "2021-10-28T16:35Z",
+      "instruments": [
+        "GOES-P: SEISS >100 MeV"
+      ],
+      "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/SEP/18101/-1",
+      "duration_h": 24.0,
+      "event_dose_msv": 10.0,
+      "illustrative_note": "The event's time, instruments and link are real NASA DONKI data. The dose, duration and shelter numbers are an illustrative ASTRA replay model, not a DONKI measurement.",
+      "is_default": true
+    }
+  ]
+}

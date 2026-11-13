@@ -1,0 +1,302 @@
+[
+  {
+    "id": "cardiac",
+    "name": "Chest pain / collapse",
+    "icon": "heart-crack",
+    "summary": "A crewmate has chest pain, or has collapsed.",
+    "pre": [
+      {
+        "id": "c1",
+        "title": "Call it out",
+        "detail": "Announce “medical emergency” on the crew loop. The Crew Medical Officer leads."
+      },
+      {
+        "id": "c2",
+        "title": "Secure patient and rescuer",
+        "detail": "In weightlessness you will both drift. Use the medical restraint, foot loops or a wall."
+      },
+      {
+        "id": "c3",
+        "title": "Check response and breathing (10 s max)",
+        "detail": "Tap the shoulders, call their name, and look for normal breathing."
+      }
+    ],
+    "tracks": [
+      {
+        "id": "A",
+        "label": "Not breathing normally",
+        "steps": [
+          {
+            "id": "a1",
+            "title": "Start CPR now",
+            "detail": "Use the restraint for back support, or the Evetts–Russomano handstand: feet braced on the wall, hands on the chest, push with your legs.",
+            "cue": null
+          },
+          {
+            "id": "a2",
+            "title": "Attach the defibrillator (AED)",
+            "detail": "Follow its voice prompts. Everyone stays clear while it analyses and shocks."
+          },
+          {
+            "id": "a3",
+            "title": "Keep the cycles going",
+            "detail": "Swap compressors every 2 minutes. ASTRA timestamps each step for the ground team."
+          }
+        ]
+      },
+      {
+        "id": "B",
+        "label": "Conscious, chest pain",
+        "steps": [
+          {
+            "id": "b1",
+            "title": "Rest and monitor",
+            "detail": "Keep them still and calm. Attach the monitor. HR, BP and SpO2 are logged every 5 minutes."
+          },
+          {
+            "id": "b2",
+            "title": "Onboard cardiac checklist",
+            "detail": "Give oxygen or medications only as written in the flight-surgeon-approved protocol."
+          },
+          {
+            "id": "b3",
+            "title": "Record what happened",
+            "detail": "Note when it started, what the pain feels like, where it spreads, and any other symptoms."
+          },
+          {
+            "id": "b4",
+            "title": "Be ready to switch to CPR",
+            "detail": "If they stop responding or stop breathing normally, switch to the other track."
+          }
+        ]
+      }
+    ],
+    "post": [
+      {
+        "id": "p1",
+        "title": "Priority packet to ground",
+        "detail": "Initial priority alert sent automatically at T+0. Step timeline is transmitted upon completion.",
+        "auto": true
+      },
+      {
+        "id": "p2",
+        "title": "Act now, update later",
+        "detail": "Don't wait for Earth. Follow the protocol and send updates as things change."
+      }
+    ],
+    "note": "Microgravity CPR: the Evetts–Russomano method was co-developed by Brazilian researcher Thais Russomano."
+  },
+  {
+    "id": "breathing",
+    "name": "Breathing difficulty",
+    "icon": "wind",
+    "summary": "A crewmate is short of breath, or an atmosphere alarm is sounding.",
+    "pre": [
+      {
+        "id": "c1",
+        "title": "Call it out",
+        "detail": "Announce the emergency. One crew member checks the cabin atmosphere displays."
+      },
+      {
+        "id": "c2",
+        "title": "Check the air first",
+        "detail": "Is there a CO2, ammonia, smoke or pressure alarm? Protect yourself before helping."
+      }
+    ],
+    "tracks": [
+      {
+        "id": "A",
+        "label": "Atmosphere alarm",
+        "steps": [
+          {
+            "id": "a1",
+            "title": "Masks on",
+            "detail": "Put on emergency masks or oxygen for everyone, patient first if they can't."
+          },
+          {
+            "id": "a2",
+            "title": "Move to a safe module",
+            "detail": "Follow the alarm checklist and close the hatch behind you."
+          },
+          {
+            "id": "a3",
+            "title": "Monitor SpO2 and breathing",
+            "detail": "Measure every 5 minutes. ASTRA logs the values."
+          }
+        ]
+      },
+      {
+        "id": "B",
+        "label": "Air is normal",
+        "steps": [
+          {
+            "id": "b1",
+            "title": "Upright and anchored",
+            "detail": "Restrain them in an upright position and keep them calm."
+          },
+          {
+            "id": "b2",
+            "title": "Measure SpO2 and breathing rate",
+            "detail": "Repeat every 5 minutes. Below 90% means the oxygen protocol."
+          },
+          {
+            "id": "b3",
+            "title": "Look for a cause",
+            "detail": "Allergy, asthma, chest injury or infection: follow the matching onboard checklist."
+          }
+        ]
+      }
+    ],
+    "post": [
+      {
+        "id": "p1",
+        "title": "Priority packet to ground",
+        "detail": "Initial priority alert sent automatically at T+0. Step timeline is transmitted upon completion.",
+        "auto": true
+      },
+      {
+        "id": "p2",
+        "title": "Act now, update later",
+        "detail": "Don't wait for Earth. Keep monitoring and send updates."
+      }
+    ],
+    "note": "Dust from the Moon and Mars is fine and sharp, so always rule it out after an EVA."
+  },
+  {
+    "id": "head",
+    "name": "Head injury / unconscious",
+    "icon": "brain",
+    "summary": "A crewmate hit their head or was found unresponsive.",
+    "pre": [
+      {
+        "id": "c1",
+        "title": "Call it out",
+        "detail": "Announce the emergency. The CMO leads."
+      },
+      {
+        "id": "c2",
+        "title": "Protect the neck",
+        "detail": "Avoid twisting the head and neck. Use the collar from the medical kit if one is available."
+      },
+      {
+        "id": "c3",
+        "title": "Check response and breathing",
+        "detail": "If not breathing normally, use the chest pain / collapse protocol."
+      }
+    ],
+    "tracks": [
+      {
+        "id": "A",
+        "label": "Unconscious, breathing",
+        "steps": [
+          {
+            "id": "a1",
+            "title": "Keep the airway open",
+            "detail": "Restrain them gently on their side and watch the breathing continuously."
+          },
+          {
+            "id": "a2",
+            "title": "Check pupils every 5 minutes",
+            "detail": "Unequal or unresponsive pupils are a red flag for the ground team."
+          }
+        ]
+      },
+      {
+        "id": "B",
+        "label": "Conscious",
+        "steps": [
+          {
+            "id": "b1",
+            "title": "Neuro checks every 15 minutes",
+            "detail": "Check orientation, speech, pupils, and strength in hands and feet."
+          },
+          {
+            "id": "b2",
+            "title": "Watch for red flags",
+            "detail": "Worsening headache, vomiting, confusion or drowsiness: escalate immediately."
+          }
+        ]
+      }
+    ],
+    "post": [
+      {
+        "id": "p1",
+        "title": "Priority packet to ground",
+        "detail": "Initial priority alert sent automatically at T+0. Step timeline is transmitted upon completion.",
+        "auto": true
+      },
+      {
+        "id": "p2",
+        "title": "No critical tasks for 24 h",
+        "detail": "The patient stays off EVAs and critical operations until cleared."
+      }
+    ],
+    "note": "Loose objects become projectiles in weightlessness, so secure the area first."
+  },
+  {
+    "id": "allergy",
+    "name": "Severe allergic reaction",
+    "icon": "shield-alert",
+    "summary": "Swelling, hives, or breathing trouble after food, medicine or exposure.",
+    "pre": [
+      {
+        "id": "c1",
+        "title": "Call it out",
+        "detail": "Announce the emergency. The CMO leads."
+      },
+      {
+        "id": "c2",
+        "title": "Remove the trigger",
+        "detail": "Stop the food or medicine, or move away from the exposure."
+      }
+    ],
+    "tracks": [
+      {
+        "id": "A",
+        "label": "Breathing or throat affected",
+        "steps": [
+          {
+            "id": "a1",
+            "title": "Epinephrine auto-injector",
+            "detail": "Use it as written in the onboard anaphylaxis checklist."
+          },
+          {
+            "id": "a2",
+            "title": "Oxygen and monitoring",
+            "detail": "Oxygen per protocol. SpO2 and breathing rate every 5 minutes."
+          }
+        ]
+      },
+      {
+        "id": "B",
+        "label": "Skin only",
+        "steps": [
+          {
+            "id": "b1",
+            "title": "Antihistamine per checklist",
+            "detail": "Follow the onboard allergy checklist."
+          },
+          {
+            "id": "b2",
+            "title": "Watch for 4 hours",
+            "detail": "If breathing or swallowing becomes difficult, switch to the other track."
+          }
+        ]
+      }
+    ],
+    "post": [
+      {
+        "id": "p1",
+        "title": "Priority packet to ground",
+        "detail": "Initial priority alert sent automatically at T+0. Step timeline is transmitted upon completion.",
+        "auto": true
+      },
+      {
+        "id": "p2",
+        "title": "Log the trigger",
+        "detail": "Record it so the whole crew can avoid it."
+      }
+    ],
+    "note": "Medicines can degrade faster in space radiation. Check expiry dates in the kit."
+  }
+]

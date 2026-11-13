@@ -1,0 +1,66 @@
+{
+  "slot": "C",
+  "title": "Canadian Space Agency: monitoring radiation and why we do science in space",
+  "listed_on": "https://www.spaceappschallenge.org/2026/challenges/health-monitoring-software/?tab=resources",
+  "retrieved": "2026-11-13",
+  "pages": [
+    {
+      "id": "csa_radiation",
+      "title": "Monitoring Radiation for Astronaut Health",
+      "url": "https://www.asc-csa.gc.ca/eng/news/articles/2026/2026-02-26-monitoring-radiation-astronaut-health.asp",
+      "date": "2026-02-26",
+      "challenge_note": "How the CSA monitors space radiation to protect astronaut health on long-duration missions, including Canadian technologies used to measure exposure."
+    },
+    {
+      "id": "csa_why_science",
+      "title": "Why Do We Conduct Science Experiments in Space?",
+      "url": "https://www.asc-csa.gc.ca/eng/iss/science/why-do-we-conduct-science-experiments-in-space.asp",
+      "challenge_note": "How the space environment enables experiments that cannot be done on Earth, and how ISS research advances human health and technology."
+    }
+  ],
+  "radiation_facts": [
+    {"text": "Neutron radiation makes up about 30% of the total radiation on the International Space Station.",
+     "url": "https://www.asc-csa.gc.ca/eng/news/articles/2026/2026-02-26-monitoring-radiation-astronaut-health.asp"},
+    {"text": "ISS astronauts typically receive about 150 microsieverts of neutron radiation a day, hundreds of times more than on Earth.",
+     "url": "https://www.asc-csa.gc.ca/eng/sciences/radi-n2.asp"},
+    {"text": "Neutron doses are generally lower in the sleeping quarters than elsewhere on the station, and differ only slightly between the seven US modules.",
+     "url": "https://www.asc-csa.gc.ca/eng/sciences/radi-n2.asp"},
+    {"text": "Long-term neutron exposure can potentially cause cataracts, bone-marrow damage and cancer.",
+     "url": "https://www.asc-csa.gc.ca/eng/sciences/radi-n2.asp"},
+    {"text": "On spacewalks, measured doses to the skin, eyes and blood-forming organs were about 6, 13 and 25 times the internationally set limits for nuclear-industry workers.",
+     "url": "https://www.asc-csa.gc.ca/eng/iss/evarm.asp"}
+  ],
+  "instruments": [
+    {"id": "mosfet", "name": "MOSFET dosimeters", "years": "1992 onward",
+     "url": "https://www.asc-csa.gc.ca/eng/astronauts/space-medicine/mosfet.asp",
+     "what": "Miniature silicon dosimeters: radiation shifts the sensor's voltage. Shields of different thickness estimate dose to the skin, eyes and blood-forming organs."},
+    {"id": "evarm", "name": "EVARM", "years": "2002-2003",
+     "url": "https://www.asc-csa.gc.ca/eng/iss/evarm.asp",
+     "what": "Three MOSFET badges worn inside the spacesuit (one on the lower leg, two on the torso) measured organ doses during spacewalks."},
+    {"id": "radi_n2", "name": "Radi-N and Radi-N2 bubble detectors", "years": "2009-2020",
+     "url": "https://www.asc-csa.gc.ca/eng/sciences/radi-n2.asp",
+     "what": "Finger-sized gel tubes: a neutron that hits a droplet leaves a visible bubble to count. Eight per session for a week: six around the station, one worn by the astronaut, one in the sleeping quarters."},
+    {"id": "cans", "name": "Canadian Active Neutron Spectrometer (CANS)", "years": "in development",
+     "url": "https://www.asc-csa.gc.ca/eng/news/articles/2026/2026-02-26-monitoring-radiation-astronaut-health.asp",
+     "what": "A compact instrument that measures neutron exposure continuously and autonomously; the CSA awarded a $5.5 million contract to keep developing it."}
+  ],
+  "body_effects": [
+    {"system": "Blood", "organs": ["immune", "heart"],
+     "text": "Bone marrow makes fewer red blood cells, which can lead to anaemia; fewer white cells raise infection risk and sensitivity to radiation."},
+    {"system": "Brain", "organs": ["brain"],
+     "text": "Astronauts can become disoriented and misjudge the direction and speed of their movement; some get space sickness."},
+    {"system": "Heart and blood vessels", "organs": ["heart", "metabolism"],
+     "text": "Blood vessels stiffen and age faster, and insulin resistance can develop, which may lead to type 2 diabetes."},
+    {"system": "Muscles and nervous system", "organs": ["musculo"],
+     "text": "Muscles lose mass and strength, reflexes slow, and exercise is less effective."},
+    {"system": "Bones", "organs": ["musculo"],
+     "text": "Adults over 50 lose about 1% of bone mass a year; astronauts can lose up to 1.5% a month."}
+  ],
+  "body_effects_url": "https://www.asc-csa.gc.ca/eng/multimedia/search/image/8056",
+  "earth_benefits": [
+    "Weightlessness causes changes that resemble accelerated ageing and a sedentary lifestyle.",
+    "Six months in orbit gives data that would take years to gather on Earth.",
+    "Findings may help people with balance problems, osteoporosis, cardiovascular disorders and type 2 diabetes.",
+    "About 200 international experiments are on board the ISS at any time."
+  ]
+}

@@ -1,0 +1,210 @@
+/* Crew palette: four hues that leave out the status colours (green, amber, red), which mark Watch and Act. */
+.root {
+  --crew-1: #86a9f5;
+  --crew-2: #b48cf2;
+  --crew-3: #4fc9d1;
+  --crew-4: #e47fc4;
+}
+:global(:root[data-theme='light']) .root {
+  --crew-1: #2e5fd1;
+  --crew-2: #7c4bc8;
+  --crew-3: #0e7c86;
+  --crew-4: #b83a8f;
+}
+.hero {
+  padding: 18px 0 8px;
+  max-width: 880px;
+}
+.hero h1 {
+  margin: 0 0 6px;
+}
+.hero p {
+  color: var(--text-2);
+  max-width: 70ch;
+}
+.meta {
+  margin-top: 14px;
+  font-size: 13.5px;
+  color: var(--text-2);
+}
+.meta b {
+  color: var(--text);
+  font-weight: 600;
+}
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin-top: 16px;
+}
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  color: var(--text-2);
+}
+.legendItem i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex: none;
+}
+.legendFlight {
+  width: 14px !important;
+  height: 10px !important;
+  border-radius: 2px !important;
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+}
+/* The ring drawn around a Watch or Act point on the charts. */
+.legendRing {
+  width: 12px !important;
+  height: 12px !important;
+  border: 2px solid var(--st);
+  background: none;
+}
+.section {
+  margin-top: 40px;
+}
+.h2 {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+.sub {
+  color: var(--text-2);
+  margin-bottom: 16px;
+  max-width: 76ch;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
+  gap: 14px;
+}
+.card {
+  padding: 14px 16px 12px;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.cardHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.cardHead h3 {
+  font-size: 15px;
+  font-weight: 600;
+}
+.cardHead span {
+  font-size: 12.5px;
+}
+/* Holds the chart's height before it is measured, so the cards do not jump. */
+.plot {
+  min-height: 170px;
+}
+.svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.refBand {
+  fill: color-mix(in srgb, var(--ok) 12%, transparent);
+}
+.refLine {
+  stroke: color-mix(in srgb, var(--ok) 45%, transparent);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+.flightBand {
+  fill: color-mix(in srgb, var(--accent) 9%, transparent);
+}
+.line {
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  opacity: 0.85;
+}
+.pt {
+  stroke: var(--surface);
+  stroke-width: 1.2;
+}
+/* Watch / Act: a ring in the status colour around the crew member's point. */
+.ring {
+  fill: none;
+  stroke: var(--st);
+  stroke-width: 2;
+}
+/* A larger invisible target, so hovering a point shows its <title>. */
+.hit {
+  fill: transparent;
+}
+.axis {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  fill: var(--text-3);
+}
+.cardFoot {
+  margin-top: 6px;
+  font-size: 12px;
+}
+.notes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+}
+.note {
+  padding: 12px 14px;
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+}
+.note b {
+  font-size: 13.5px;
+  font-weight: 600;
+}
+.note p {
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--text-2);
+}
+.disclaimer {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-top: 36px;
+  padding: 16px 18px;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--watch-line);
+  background: var(--watch-soft);
+  font-size: 14px;
+}
+.disclaimer svg {
+  color: var(--watch);
+  flex: none;
+  margin-top: 2px;
+}
+.sources {
+  margin-top: 16px;
+}
+.unavailable {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-top: 20px;
+  padding: 16px 18px;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--watch-line);
+  background: var(--watch-soft);
+  font-size: 14px;
+}
+.unavailable svg {
+  color: var(--watch);
+  flex: none;
+  margin-top: 2px;
+}

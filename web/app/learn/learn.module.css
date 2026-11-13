@@ -1,0 +1,465 @@
+.hero {
+  padding: 18px 0 8px;
+  max-width: 860px;
+}
+.hero h1 {
+  margin: 0 0 6px;
+}
+.hero p {
+  color: var(--text-2);
+  max-width: 64ch;
+}
+.toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+.toc a {
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border-2);
+  font-size: 13.5px;
+  color: var(--text-2);
+  transition: all 0.2s var(--ease);
+}
+.toc a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.section {
+  margin-top: 44px;
+  scroll-margin-top: 90px;
+}
+.h2 {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+.sub {
+  color: var(--text-2);
+  margin-bottom: 16px;
+  max-width: 72ch;
+}
+.sub b {
+  color: var(--accent);
+}
+.faq {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+}
+.qa {
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  overflow: hidden;
+}
+.qa summary {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  cursor: pointer;
+  list-style: none;
+  font-weight: 600;
+  font-size: 16px;
+}
+.qa summary::-webkit-details-marker,
+.ind summary::-webkit-details-marker {
+  display: none;
+}
+.qn {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  flex: none;
+}
+.chev {
+  margin-left: auto;
+  color: var(--text-3);
+  transition: transform 0.25s var(--ease);
+  flex: none;
+}
+details[open] > summary .chev {
+  transform: rotate(180deg);
+}
+.qa ul {
+  margin: 0;
+  padding: 0 22px 18px 62px;
+  color: var(--text-2);
+  display: grid;
+  gap: 8px;
+}
+.hazards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+}
+.hazardHead {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.hazardHead h3 {
+  font-size: 17px;
+  font-weight: 600;
+}
+.letter {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+.list {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--text-2);
+  font-size: 14px;
+  display: grid;
+  gap: 4px;
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+}
+.chips :global(.hz) {
+  font-size: var(--fs-micro);
+}
+.systems {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+  margin-top: 14px;
+}
+.systems article {
+  scroll-margin-top: 90px;
+}
+.systems article:target {
+  border-color: var(--accent);
+  box-shadow: var(--glow);
+}
+.organIcon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  flex: none;
+}
+.space {
+  margin-top: 10px;
+  padding-left: 12px;
+  border-left: 3px solid var(--accent-2);
+  font-size: 13.5px;
+  color: var(--text-2);
+}
+.indicators {
+  display: grid;
+  gap: 10px;
+}
+.ind {
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  scroll-margin-top: 90px;
+}
+.ind summary {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  cursor: pointer;
+  list-style: none;
+}
+.indTitle {
+  min-width: 0;
+}
+.indTitle b {
+  display: block;
+  font-weight: 600;
+}
+.indTitle small {
+  color: var(--text-3);
+  font-size: 13px;
+}
+.indBody {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  padding: 4px 18px 20px 70px;
+}
+.indBody :global(.overline) {
+  display: block;
+  margin: 14px 0 6px;
+}
+.indBody p,
+.indBody ol {
+  font-size: 14px;
+  color: var(--text-2);
+}
+.indBody ol {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 4px;
+}
+.guides {
+  display: grid;
+  gap: 8px;
+}
+.guides > div {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 10px;
+  align-items: start;
+}
+.guides p {
+  font-size: 13.5px;
+}
+.ladder {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 14px;
+}
+.ladder article {
+  border-top: 3px solid var(--st);
+}
+.ladder h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 6px;
+}
+.ladder p {
+  font-size: 14px;
+  color: var(--text-2);
+  margin-top: 8px;
+}
+.ladder p b {
+  color: var(--text);
+  font-weight: 500;
+}
+.tier {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--st);
+}
+.tableCard {
+  padding: 0;
+  overflow: hidden;
+  margin-top: 14px;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.table th {
+  text-align: left;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: var(--fs-micro);
+  letter-spacing: 0.08em;
+  color: var(--text-3);
+  padding: 14px 16px;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+}
+/* Keep a value and its unit together ("5 min 36 s", "1.84 mSv/day"). */
+.table td:global(.num) {
+  white-space: nowrap;
+}
+.table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  color: var(--text-2);
+}
+.table tr:last-child td {
+  border-bottom: 0;
+}
+.table td b {
+  display: block;
+  color: var(--text);
+  font-weight: 600;
+}
+.table td small {
+  color: var(--text-3);
+  font-size: 12.5px;
+}
+.disclaimer {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-top: 40px;
+  padding: 16px 18px;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--watch-line);
+  background: var(--watch-soft);
+  font-size: 14px;
+}
+.disclaimer svg {
+  color: var(--watch);
+  flex: none;
+  margin-top: 2px;
+}
+.sources {
+  margin-top: 14px;
+}
+.srcGroup {
+  margin-top: 18px;
+}
+.srcGroup :global(.overline) {
+  display: block;
+  margin-bottom: 8px;
+}
+.srcList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+.srcList li {
+  display: grid;
+  gap: 2px;
+  padding: 10px 14px;
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.srcList a {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+}
+.srcList a:hover {
+  color: var(--accent);
+}
+.extLast {
+  white-space: nowrap;
+}
+.extIcon {
+  display: inline-block;
+  vertical-align: -1px;
+  color: var(--text-3);
+}
+.srcList small {
+  font-size: 12.5px;
+  color: var(--text-3);
+}
+@media (max-width: 860px) {
+  .indBody {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    padding: 0 18px 18px;
+  }
+  .ladder {
+    grid-template-columns: 1fr;
+  }
+  .qa ul {
+    padding: 0 18px 16px 34px;
+  }
+  .table thead {
+    display: none;
+  }
+  .table,
+  .table tbody,
+  .table tr,
+  .table td {
+    display: block;
+    width: 100%;
+  }
+  .table tr {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .table td {
+    border: 0;
+    padding: 4px 16px;
+  }
+  .table td[data-label]::before {
+    content: attr(data-label);
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    letter-spacing: 0.08em;
+    color: var(--text-3);
+  }
+}
+
+@media (max-width: 479px) {
+  /* Colour guide: chip above its text, so the text gets the full width. */
+  .guides > div {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    justify-items: start;
+  }
+}
+
+@media (max-width: 767px) {
+  /* Table of contents: one row that scrolls sideways; the padding keeps focus rings inside the scroll box. */
+  .toc {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin-inline: -4px;
+    padding: 4px;
+  }
+  .toc::-webkit-scrollbar {
+    display: none;
+  }
+  .toc a {
+    flex: none;
+    white-space: nowrap;
+  }
+}
+
+/* Touch targets: 44px for primary controls on touch / narrow screens (docs/ux roadmap Phase 2). */
+@media (pointer: coarse), (max-width: 1023px) {
+  .toc a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+}
+
+@media (pointer: coarse), (max-width: 1023px) {
+  /* Document links in the source list: padded so each is at least 44px tall. */
+  .srcList a {
+    display: block;
+    padding-block: 12px;
+  }
+}
+.hazardLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 10px 0 0;
+  font-size: 13.5px;
+}
+.hazardLinks a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--accent);
+}

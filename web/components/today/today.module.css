@@ -1,0 +1,448 @@
+/* Today page: the readiness panel and the check timeline. */
+
+/* ---------- readiness panel ---------- */
+.hero {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 24px;
+  padding: 18px 22px;
+  margin-bottom: 20px;
+  border-radius: var(--r-lg, 14px);
+  border: 1px solid var(--border);
+  /* A wash of the overall status from the ring's side, fading into the surface. */
+  background:
+    radial-gradient(120% 140% at 0% 50%, var(--st-soft, transparent) 0%, transparent 55%),
+    var(--surface);
+}
+
+.orbit {
+  display: block;
+  flex: none;
+}
+.orbitTrack {
+  stroke: var(--surface-3);
+}
+.orbitArc {
+  animation: orbitIn 0.6s var(--ease-out, ease-out) both;
+}
+@keyframes orbitIn {
+  from {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .orbitArc {
+    animation: none;
+  }
+}
+.orbitNum {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  fill: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+.orbitOf {
+  font-size: 13px;
+  font-weight: 600;
+  fill: var(--text-3);
+}
+.orbitLabel {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  fill: var(--text-3);
+}
+
+.heroText {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+.heroName {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  color: var(--text);
+}
+.heroName span {
+  font-size: 1.0625rem;
+  font-weight: 500;
+  color: var(--text-2);
+}
+.heroSummary {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: var(--text-2);
+}
+
+.legend {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-2);
+}
+.legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.legend i {
+  width: 14px;
+  height: 5px;
+  border-radius: 99px;
+  background: var(--st);
+}
+.legendMissing i {
+  background: transparent;
+  border: 1px dashed var(--border-3);
+}
+
+/* Three numbers that gate the day, each tinted by its own status. The stats share four rows (label, value, meter,
+   caption), so values and captions line up across the three even when a label or caption wraps. */
+.stats {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(132px, 1fr));
+  grid-template-rows: repeat(4, auto);
+  gap: 2px 10px;
+}
+.stat {
+  position: relative;
+  display: grid;
+  grid-row: span 4;
+  grid-template-rows: subgrid;
+  align-content: start;
+  gap: 2px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+.stat dt {
+  grid-row: 1;
+  align-self: start;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.stat dt::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--st, var(--border-3));
+  box-shadow: 0 0 0 3px var(--st-soft, transparent);
+}
+.stat dd {
+  grid-row: 2;
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--st, var(--text));
+  font-variant-numeric: tabular-nums;
+}
+.stat dd span {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-3);
+}
+.stat small {
+  grid-row: 4;
+  font-size: 0.75rem;
+  color: var(--text-3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.meter {
+  grid-row: 3;
+  height: 4px;
+  margin: 4px 0 2px;
+  border-radius: 99px;
+  background: var(--surface-3);
+  overflow: hidden;
+}
+.meter i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--st, var(--accent));
+}
+
+/* Breakpoints read the page's width (the `today` container in overview.module.css), not the viewport's:
+   1205px and 562px are the page's width at 1279px and 600px viewports. */
+@container today (max-width: 1205px) {
+  .hero {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+  .stats {
+    grid-column: 1 / -1;
+  }
+}
+
+@container today (max-width: 562px) {
+  .hero {
+    gap: 16px;
+    padding: 16px;
+  }
+  .heroName {
+    font-size: 1.25rem;
+  }
+  /* The role on its own line, without the separator that would otherwise start it. */
+  .heroName > span {
+    display: block;
+  }
+  .heroSep {
+    display: none;
+  }
+  .stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 8px;
+  }
+  .stat {
+    padding: 10px;
+  }
+  /* A label that doesn't fit wraps whole (never clipped); the shared rows keep the values level. */
+  .stat dt {
+    gap: 5px;
+    letter-spacing: 0.04em;
+  }
+  .stat dd {
+    font-size: 1.0625rem;
+  }
+  /* Whole captions (an EVA No-go reason must never be cut), wrapped over as many lines as they need. */
+  .stat small {
+    white-space: normal;
+    overflow: visible;
+  }
+}
+
+/* ---------- check timeline ---------- */
+.checksCard {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+}
+
+.timeline {
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+/* Grid: 52px time, 12px gap, 20px dot column, so every dot is centred at 74px. */
+.tItem,
+.tNow {
+  --dot-x: 74px;
+  position: relative;
+  display: grid;
+  grid-template-columns: 52px 20px minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: 12px;
+  padding: 8px 10px 8px 0;
+  border-radius: 12px;
+}
+/* The rail: one piece per row through the dot centre, starting at the first dot and ending at the last. */
+.tItem::before,
+.tNow::before {
+  content: '';
+  position: absolute;
+  left: calc(var(--dot-x) - 1px);
+  top: 0;
+  bottom: -2px; /* bridge the list gap */
+  width: 2px;
+  background: var(--border-2);
+}
+.timeline > :first-child::before {
+  top: 50%;
+}
+.timeline > :last-child::before {
+  bottom: 50%;
+}
+.tTime {
+  justify-self: end;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.8125rem;
+  color: var(--text-3);
+  font-variant-numeric: tabular-nums;
+}
+.tDot {
+  position: relative;
+  justify-self: center;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--border-3);
+  z-index: 1;
+}
+.tBody {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.tBody b {
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: var(--text);
+  text-wrap: balance;
+}
+.tBody small {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--st);
+}
+.planLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+}
+/* What finishing a check now pays: Honest Orbit shown where the action is, not on a page of its own. */
+.tXp {
+  color: var(--accent);
+  white-space: nowrap;
+}
+/* Under "Checks today": streak and today's XP, opening your Progress. */
+.statGame {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+  min-height: 24px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+}
+.statGame:hover {
+  text-decoration: underline;
+}
+.statGame svg {
+  flex: none;
+  color: #f08a3c;
+}
+
+/* Due and overdue checks glow in their status colour. */
+.tDue {
+  background: var(--st-soft);
+}
+.tDue .tTime {
+  color: var(--st);
+  font-weight: 600;
+}
+.tDue .tDot {
+  background: var(--st);
+  border-color: var(--st);
+  box-shadow: 0 0 0 4px var(--st-soft);
+}
+
+/* The current time, as a line across the rail. */
+.tNow {
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+.tNow .tTime {
+  color: var(--accent);
+  font-weight: 600;
+}
+.tNowLine {
+  grid-column: 2 / 4;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  position: relative;
+  z-index: 1;
+}
+.tNowLine::before {
+  content: '';
+  position: absolute;
+  left: 5px; /* centred on the rail: 64px column start + 5px + half of 10px = 74px */
+  top: -4px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.tNowLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* Narrow page: a tighter time column and dot column leave the check's name room on one or two lines.
+   40px time, 8px gap, 12px dot column: every dot centred at 54px. */
+@container today (max-width: 562px) {
+  .tItem,
+  .tNow {
+    --dot-x: 54px;
+    grid-template-columns: 40px 12px minmax(0, 1fr) auto;
+    column-gap: 8px;
+  }
+  .tNowLine::before {
+    left: 1px; /* 48px column start + 1px + half of 10px = 54px */
+  }
+}
+
+/* Touch targets: 44px for primary controls on touch / narrow screens (docs/ux roadmap Phase 2). */
+@media (pointer: coarse), (max-width: 1023px) {
+  .planLink {
+    min-height: 44px;
+  }
+}
+
+/* Completed checks fill the bottom of the card: what is already behind you today. */
+.doneToday {
+  margin-top: auto;
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.doneToday ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.doneToday li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px 4px 8px;
+  border-radius: 99px;
+  background: var(--ok-soft);
+  color: var(--text-2);
+  font-size: 0.8125rem;
+}
+.doneToday li svg {
+  color: var(--ok);
+}
+.doneTime {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.75rem;
+  color: var(--text-3);
+}

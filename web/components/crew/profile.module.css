@@ -1,0 +1,388 @@
+/* Crew member profile: who they are, body and career, and how their history shows up in today's readings. */
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 16px;
+  font-size: 0.875rem;
+  color: var(--text-2);
+  text-decoration: none;
+}
+.back:hover {
+  color: var(--text);
+}
+/* Full-height tap target on touch; the negative margins keep the link where it was. */
+@media (pointer: coarse), (max-width: 1023px) {
+  .back {
+    min-height: var(--target);
+    margin-block: -11px 5px;
+  }
+}
+
+/* ---------- hero ---------- */
+.hero {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: center;
+  padding: 24px;
+  margin-bottom: 16px;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border);
+  background:
+    radial-gradient(120% 140% at 0% 0%, var(--st-soft) 0%, transparent 45%),
+    var(--surface);
+}
+.heroAvatar {
+  display: grid;
+  place-items: center;
+  padding: 3px;
+  border-radius: 50%;
+  background: var(--st);
+}
+.heroAvatar :global(.avatar) {
+  box-shadow: 0 0 0 3px var(--surface);
+}
+.heroText {
+  min-width: 0;
+}
+.heroText h1 {
+  margin: 0;
+}
+.heroRole {
+  margin: 4px 0 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-2);
+}
+.heroMeta {
+  margin: 6px 0 0;
+  font-size: 0.875rem;
+  color: var(--text-3);
+}
+.heroBg {
+  margin: 10px 0 0;
+  max-width: 62ch;
+  font-size: 0.9375rem;
+  color: var(--text-2);
+}
+.heroSide {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 232px;
+}
+.heroStatus {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 0;
+}
+/* Same width as the two status tiles above it, so the side column reads as one block.
+   Scoped under .heroSide so it beats the global .btn rule whatever order the stylesheets load in. */
+.heroSide .viewAs {
+  display: flex;
+  align-self: stretch;
+  width: 100%;
+  height: 40px;
+  justify-content: center;
+  gap: 8px;
+}
+.heroStatus > div {
+  min-width: 92px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: var(--surface-2);
+}
+.heroStatus dt,
+.facts dt {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.heroStatus dd {
+  margin: 2px 0 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--st, var(--text));
+}
+
+/* ---------- facts ---------- */
+.facts {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0 0 16px;
+}
+.facts > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  padding: 12px 14px;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.facts dd {
+  margin: 2px 0 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+.facts dd.stValue {
+  color: var(--st, var(--text));
+}
+.facts small {
+  font-size: 0.75rem;
+  color: var(--text-3);
+}
+
+/* ---------- history to today ---------- */
+.links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.link {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 16px;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+}
+.linkActive {
+  border-color: var(--st-line);
+  background:
+    linear-gradient(var(--st-soft), var(--st-soft)),
+    var(--surface-2);
+}
+.linkHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+.linkHead b {
+  font-size: 0.9375rem;
+}
+.linkMeta {
+  flex: none;
+  font-size: 0.75rem;
+  color: var(--text-3);
+}
+.linkWhy {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--text-2);
+}
+.linkNow {
+  list-style: none;
+  margin: 2px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.reading > a,
+.reading > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 28px;
+  padding: 0 10px;
+  border-radius: 99px;
+  font-size: 0.8125rem;
+  color: var(--st);
+  background: var(--st-soft);
+  text-decoration: none;
+}
+.reading > a:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+/* Touch: the trend link's tap area grows to the full target height without making the pill taller. */
+@media (pointer: coarse), (max-width: 1023px) {
+  .reading > a {
+    position: relative;
+  }
+  .reading > a::after {
+    content: '';
+    position: absolute;
+    inset: calc((100% - var(--target)) / 2) 0;
+  }
+}
+/* On a tinted (active) card a second tint would sink the status colour below 4.5:1, so the pill sits on plain surface. */
+.linkActive .reading:not(.noData) > a,
+.linkActive .reading:not(.noData) > span {
+  background: var(--surface-2);
+}
+.reading span span {
+  color: var(--text-2);
+}
+.reading b {
+  font-weight: 700;
+}
+.noData > span {
+  color: var(--text-3);
+  background: var(--surface-3);
+}
+
+/* ---------- lower cards ---------- */
+/* Columns follow the room the page really has (it narrows when the specialist panel is docked), not the window:
+   4 cards side by side only when each gets ~280px, else 2, else 1. */
+.gridWrap {
+  container-type: inline-size;
+  margin-top: 16px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+}
+@container (min-width: 620px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+/* Three cards side by side once each gets ~330px (achievements moved into the Progress section below). */
+@container (min-width: 1020px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+.kv {
+  display: grid;
+  /* minmax(0, …): the value column may shrink below its longest chip, which then wraps instead of spilling out. */
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 10px 16px;
+  margin: 0;
+  font-size: 0.875rem;
+}
+/* Long allergy names ("Ibuprofen (stomach upset)") wrap inside their chip. */
+.kv dd :global(.chip) {
+  height: auto;
+  min-height: 22px;
+  max-width: 100%;
+  padding-block: 3px;
+  white-space: normal;
+  line-height: 1.3;
+}
+.kv dt {
+  color: var(--text-3);
+}
+.kv dd {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.med {
+  color: var(--text);
+}
+.missions {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.missions li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-left: 14px;
+  border-left: 2px solid var(--border-2);
+  font-size: 0.875rem;
+}
+.missions li span {
+  font-size: 0.8125rem;
+  color: var(--text-3);
+}
+.missions .current {
+  border-left-color: var(--accent);
+}
+.level {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 0.875rem;
+}
+.level > span:last-child {
+  white-space: nowrap;
+}
+.levelBar {
+  display: block;
+  height: 6px;
+  margin-top: 8px;
+  border-radius: 99px;
+  background: var(--surface-3);
+  overflow: hidden;
+}
+.levelBar i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--accent);
+}
+.badges {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.badges li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 99px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 1023px) {
+  .facts {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .links {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 680px) {
+  /* Phone: photo above the text, so the name and background get the full width. */
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 18px;
+    gap: 14px;
+  }
+  .heroAvatar {
+    justify-self: start;
+  }
+  .heroSide {
+    grid-column: 1 / -1;
+    min-width: 0;
+  }
+  .facts {
+    grid-template-columns: 1fr 1fr;
+  }
+  /* An odd last tile takes the full row instead of sitting next to an empty half. */
+  .facts > div:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}

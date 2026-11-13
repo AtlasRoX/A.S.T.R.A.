@@ -1,0 +1,112 @@
+.toast-region {
+  position: fixed;
+  right: 20px;
+  /* Above the round Ask ASTRA button (20px up, 46px tall), never on top of it. */
+  bottom: 78px;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: min(380px, calc(100vw - 24px));
+  pointer-events: none;
+  transition:
+    right var(--dock-in),
+    bottom var(--dock-in);
+}
+/* The specialist panel is open (the Ask button is hidden): toasts sit beside it, never over its question box.
+   Floating panel (768-1279px): toasts move to the left corner. Docked panel (1280px and up): just left of it. */
+@media (min-width: 768px) {
+  html[data-assistant='open'] .toast-region {
+    bottom: 20px;
+  }
+}
+@media (min-width: 768px) and (max-width: 1279px) {
+  html[data-assistant='open'] .toast-region {
+    right: auto;
+    left: 20px;
+    width: min(380px, calc(100vw - 480px));
+  }
+}
+@media (min-width: 1280px) {
+  html[data-assistant='open'] .toast-region {
+    right: 420px;
+  }
+}
+.toast {
+  pointer-events: auto;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: start;
+  gap: 12px;
+  padding: 13px 14px;
+  border-radius: 16px;
+  border: 1px solid var(--border-2);
+  background: var(--surface);
+  box-shadow: var(--shadow-2);
+}
+.toast-icon {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 11px;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.toast-success .toast-icon {
+  background: var(--ok-soft);
+  color: var(--ok);
+}
+.toast-warning .toast-icon {
+  background: var(--watch-soft);
+  color: var(--watch);
+}
+.toast-reward .toast-icon {
+  background: linear-gradient(140deg, var(--accent), var(--accent-2));
+  color: var(--on-accent);
+}
+.toast-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 14px;
+  min-width: 0;
+}
+.toast-text b {
+  font-weight: 600;
+}
+.toast-text span {
+  color: var(--text-2);
+  font-size: 13px;
+}
+.toast-x {
+  color: var(--text-3);
+  padding: 4px;
+  border-radius: 8px;
+}
+.toast-x:hover {
+  color: var(--text);
+  background: var(--surface-2);
+}
+/* Up to 1023px the bottom navigation shows: toasts sit above it and above the Ask button (76px up, 46px tall),
+   on the same breakpoint as the button. */
+@media (max-width: 1023px) {
+  .toast-region {
+    bottom: calc(134px + env(safe-area-inset-bottom));
+  }
+}
+/* Floating panel open (the button hidden): just above the navigation. A phone keeps 134px, clear of the sheet's
+   question box. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  html[data-assistant='open'] .toast-region {
+    bottom: calc(76px + env(safe-area-inset-bottom));
+  }
+}
+/* Phone: full width. */
+@media (max-width: 767px) {
+  .toast-region {
+    right: 12px;
+    left: 12px;
+    width: auto;
+  }
+}

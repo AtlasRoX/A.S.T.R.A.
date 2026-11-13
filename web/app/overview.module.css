@@ -1,0 +1,664 @@
+.page {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  /* Room below the last card for the round Ask ASTRA button. */
+  padding: 20px 32px 96px;
+  /* Today's grids follow the page's own width, not the viewport's: the docked specialist panel narrows the page
+     without changing the viewport. Nothing inside is position: fixed (toasts render outside the page). */
+  container: today / inline-size;
+}
+
+@media (max-width: 767px) {
+  .page {
+    padding: 16px 14px 64px;
+  }
+}
+
+/* ---------- Status Strip (Top of Today) ---------- */
+
+.liveSimWrap {
+  margin-bottom: 16px;
+}
+
+/* ---------- Today bands: to do, body, environment ---------- */
+.band {
+  margin-top: 24px;
+}
+
+/* Needs attention and Next checks side by side: everything to do now. */
+.todoGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(300px, 1fr);
+  gap: 24px;
+  align-items: stretch;
+}
+.todoQueue {
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+}
+.todoQueue > button:last-child {
+  margin-top: auto;
+  align-self: flex-start;
+}
+/* Nothing needs attention: the short empty card keeps its own height instead of stretching to the checks. */
+.todoQueue:not(:has(li)) {
+  align-self: start;
+}
+
+/* Radiation, cabin air and (during a conjunction) the Earth link share a row; one card alone fills it. */
+.envGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  gap: 24px;
+  align-items: stretch;
+}
+.envGrid > section {
+  container-type: inline-size;
+}
+
+/* The page's width at a 1023px viewport (minus scrollbar and side padding). */
+@container today (max-width: 949px) {
+  .todoGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Section Blocks ---------- */
+.sectionBlock {
+  padding: 18px 20px 22px;
+  border-radius: var(--r-lg, 14px);
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.blockHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 16px;
+  margin-bottom: 16px;
+}
+
+.h2 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0;
+  color: var(--text);
+}
+
+.blockNote {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--st, var(--text-2));
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--accent);
+  text-decoration: none;
+}
+.link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ---------- Core Vitals List ---------- */
+.vitalsGrid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 12px;
+}
+
+/* The page's width at 1279px and 767px viewports. */
+@container today (max-width: 1205px) {
+  .vitalsGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@container today (max-width: 693px) {
+  .vitalsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.vital {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: var(--r-md);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  transition: border-color 0.15s var(--ease), box-shadow 0.15s var(--ease);
+}
+.vital:hover {
+  border-color: var(--border-2);
+}
+
+.vitalMain {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Label over status in every card, so the values line up across a row. */
+.vitalTop {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.vitalLabel {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-2);
+}
+/* Two cards a row on the narrowest phones: "Body temperature" takes two lines there, so every label keeps two
+   and the values stay level across the row. */
+@container today (max-width: 345px) {
+  .vitalLabel {
+    min-height: 2lh;
+  }
+}
+
+.vitalStatus {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--st);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.vitalValue {
+  font-size: 1.625rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+.vitalValue small {
+  margin-left: 4px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-3);
+  letter-spacing: 0;
+}
+
+/* Two narrow cards a row (the page's width at a 767px viewport): a smaller value, and the unit wraps under it
+   rather than out of the card. */
+@container today (max-width: 693px) {
+  .vitalValue {
+    font-size: 1.375rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    column-gap: 4px;
+  }
+  .vitalValue small {
+    margin-left: 0;
+  }
+}
+
+.vitalSpark {
+  margin: 4px 0 2px;
+}
+
+.vitalMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2px 8px;
+  font-size: 0.75rem;
+  color: var(--text-3);
+}
+
+.vitalBottom {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.vitalActive {
+  display: block;
+  margin-top: 4px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: var(--text-2);
+  background: var(--accent-soft);
+}
+
+/* ---------- Next Checks ---------- */
+
+.earthMain {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.earthRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 12px;
+  border-radius: var(--r-md);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+}
+
+.earthLabel {
+  font-size: 0.8125rem;
+  color: var(--text-3);
+  font-weight: 500;
+}
+
+.earthVal {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.conjunctionAlert {
+  padding: 10px 14px;
+  border-radius: var(--r-md);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--act);
+  background: var(--act-soft);
+  border: 1px solid var(--act-line);
+}
+
+.rad {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.radMain {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.radValue {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  font-size: 1.875rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.radValue small {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-3);
+}
+
+.radBar {
+  margin-top: 6px;
+}
+/* Track tinted by the engine's dose grading (services.py: Watch above 60 %, Act above 85 % of the career
+   limit); the fill takes the dose's own status colour. */
+.radTrack {
+  position: relative;
+  height: 10px;
+  border-radius: 99px;
+  background: linear-gradient(
+    90deg,
+    var(--ok-soft) 0%,
+    var(--ok-soft) 60%,
+    var(--watch-soft) 60%,
+    var(--watch-soft) 85%,
+    var(--act-soft) 85%
+  );
+  overflow: hidden;
+}
+.radTrack i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--ok), var(--st, var(--ok)));
+  transition: width 0.6s var(--ease-out);
+}
+.radScale {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px;
+  font-size: 0.75rem;
+  color: var(--text-3);
+}
+
+.radFacts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.radFacts > div {
+  padding: 10px 12px;
+  border-radius: var(--r-md);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.radFacts b {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.radFacts small {
+  font-size: 0.75rem;
+  color: var(--text-3);
+  font-weight: 400;
+}
+
+.radFoot {
+  display: grid;
+  gap: 8px;
+}
+
+/* A full-width radiation card reads left to right: dose, facts, solar activity and sources. */
+@container (min-width: 820px) {
+  .rad {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+    gap: 24px;
+  }
+  .radFacts {
+    grid-template-columns: 1fr;
+  }
+  .cabin {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+    gap: 24px;
+  }
+}
+
+.solarLine {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-2);
+}
+
+.solarLine svg {
+  flex: none;
+}
+
+/* An event in progress: headline, record id, then what to do and how long it lasts. */
+.solarEvent {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--act-soft);
+  color: var(--act);
+}
+.solarEvent svg {
+  margin-top: 2px;
+}
+.solarEvent > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.solarEvent b {
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+.solarEvent small {
+  font-size: 0.75rem;
+  color: var(--text-3);
+  overflow-wrap: anywhere;
+}
+.solarShelter {
+  margin-top: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.solarLeft {
+  font-size: 0.8125rem;
+  color: var(--text-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.solarActions {
+  margin: 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 3px;
+  font-size: 13px;
+  color: var(--text-2);
+}
+
+.cabin {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.cabinMain {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cabinValue {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.cabinValue small {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-3);
+}
+
+.cabinFacts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.cabinFacts > div {
+  padding: 8px 10px;
+  border-radius: var(--r-md);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cabinFacts b {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.cabinFacts small {
+  font-size: 0.75rem;
+  color: var(--text-3);
+}
+
+.cabinFoot {
+  display: grid;
+  gap: 8px;
+}
+
+.cabinGuide {
+  font-size: 12.5px;
+  color: var(--text-2);
+  margin: 0;
+}
+
+/* ---------- Collapsible Sections (Body Systems & Hazards) ---------- */
+.collapsibleBlock {
+  padding: 20px 24px 24px;
+  border-radius: var(--r-lg, 14px);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  margin-top: 24px;
+}
+
+.collapsibleSummary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  min-height: 44px;
+}
+
+.collapsibleSummary::-webkit-details-marker {
+  display: none;
+}
+
+.collapsibleSummary .blockHead {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.collapseChevron {
+  color: var(--text-3);
+  flex-shrink: 0;
+  transition: transform 0.15s ease;
+}
+/* The five hazards turn their chevron here; Body systems sets it from its own state. */
+.collapsibleBlock[open] > .collapsibleSummary .collapseChevron {
+  transform: rotate(180deg);
+}
+
+.collapsibleContent {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+
+/* ---------- Hazards Cards Grid ---------- */
+.hazards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.hazard {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  border-radius: var(--r-md);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+}
+
+.hazardHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.hazardHead b {
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.hazardStatus {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--st);
+  text-transform: uppercase;
+}
+
+.hazardFact {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--text-2);
+  margin: 0;
+}
+
+.hazardRisk {
+  font-size: 0.75rem;
+  color: var(--text-3);
+  margin: 0;
+}
+
+.chips {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  border-radius: var(--r-sm);
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-2);
+  text-decoration: none;
+}
+.chip i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--st, currentColor);
+}
+
+/* Touch targets: 44px for primary controls on touch / narrow screens (docs/ux roadmap Phase 2). */
+@media (pointer: coarse), (max-width: 1023px) {
+  .chip {
+    min-height: 44px;
+    padding-inline: 12px;
+  }
+  .link {
+    min-height: 44px;
+  }
+}

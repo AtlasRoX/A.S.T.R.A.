@@ -1,0 +1,1036 @@
+/* Missions: the Honest Orbit game. Calm, instrument-panel styling; colour carries meaning (accent = progress,
+   orange = streak, green = done, amber = shield/guard). */
+
+/* ---------- hero ---------- */
+.hero {
+  display: grid;
+  gap: 18px;
+  margin-bottom: 16px;
+  padding: 20px 24px;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border);
+  background:
+    radial-gradient(120% 140% at 0% 0%, color-mix(in srgb, var(--accent) 10%, transparent) 0%, transparent 45%),
+    var(--surface);
+}
+/* Level, streak and today's XP, side by side with thin dividers. */
+.heroStats {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 28px;
+}
+.heroLevel,
+.heroStreak,
+.heroToday {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.heroStreak,
+.heroToday {
+  padding-left: 28px;
+  border-left: 1px solid var(--border);
+}
+.heroToday {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+}
+.heroTitle {
+  display: block;
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+.xpEarned {
+  color: var(--accent);
+}
+.heroSub {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.8125rem;
+  color: var(--text-2);
+}
+.heroSub b {
+  color: var(--text);
+}
+.ring {
+  position: relative;
+  width: 84px;
+  height: 84px;
+  flex: none;
+}
+.ringTrack {
+  fill: none;
+  stroke: var(--surface-3);
+  stroke-width: 7;
+}
+.ringFill {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 7;
+  stroke-linecap: round;
+}
+.ringText {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  line-height: 1;
+}
+.ringText small {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.ringText b {
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+.flame {
+  color: #f08a3c;
+  flex: none;
+}
+.shields {
+  display: inline-flex;
+  gap: 2px;
+  vertical-align: -3px;
+}
+.shieldOn {
+  color: var(--watch);
+}
+.shieldOff {
+  color: var(--text-3);
+}
+
+/* Today's orbit: one pip per check, the Full orbit bonus, and the single next action with what it pays now. */
+.orbit {
+  display: grid;
+  gap: 10px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.orbitHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+}
+.orbitCount {
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+.orbitBonus {
+  margin-left: auto;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+.orbitBonusDone {
+  color: var(--ok);
+}
+/* A soft track with a rounded accent fill: calm, and it grows with every finished check. */
+.orbitBar {
+  height: 8px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--text) 9%, transparent);
+}
+.orbitBar > span {
+  display: block;
+  height: 100%;
+  min-width: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 75%, transparent), var(--accent));
+  transition: width 0.6s var(--ease-out);
+}
+.nextCheck {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  margin-top: 4px;
+  padding: 12px 14px 12px 16px;
+  border-radius: 12px;
+  background: var(--surface-2);
+}
+.nextBody {
+  flex: 1 1 260px;
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+.nextTitle {
+  font-size: 1rem;
+  font-weight: 600;
+}
+.nextTime {
+  margin-left: 8px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-3);
+}
+.nextLate {
+  color: var(--act);
+}
+.nextLines {
+  font-size: 0.8125rem;
+  color: var(--text-2);
+}
+.worth {
+  flex: none;
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.allDone {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--ok);
+}
+.nextLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+/* Honest Orbit pledge: the rule behind every number on this page, at the top of "How XP works". */
+.pledge {
+  margin: 0 0 12px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--ok) 35%, transparent);
+  background: color-mix(in srgb, var(--ok) 8%, transparent);
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--text-2);
+}
+.pledge b {
+  display: block;
+  margin-bottom: 2px;
+  color: var(--ok);
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+}
+
+/* ---------- mission arc ---------- */
+.arc {
+  margin-bottom: 16px;
+}
+.track {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+}
+.segment {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.segment::before {
+  content: '';
+  height: 8px;
+  border-radius: 99px;
+  background: var(--surface-3);
+}
+.segment i {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 8px;
+  border-radius: 99px;
+  background: var(--accent);
+}
+.segPast::before {
+  background: color-mix(in srgb, var(--accent) 55%, var(--surface-3));
+}
+.segQ3::before {
+  background-image: repeating-linear-gradient(135deg, transparent 0 6px, color-mix(in srgb, var(--watch) 30%, transparent) 6px 9px);
+}
+.segPast.segQ3::before {
+  background-color: color-mix(in srgb, var(--accent) 55%, var(--surface-3));
+}
+.segment small {
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.25;
+  text-wrap: balance;
+  color: var(--text-3);
+}
+.segNow small {
+  color: var(--text);
+}
+.trackKey {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 8px 0 0;
+  font-size: 0.75rem;
+  color: var(--text-3);
+}
+.trackKey i {
+  width: 20px;
+  height: 8px;
+  flex: none;
+  border-radius: 99px;
+  background-color: var(--surface-3);
+  background-image: repeating-linear-gradient(135deg, transparent 0 6px, color-mix(in srgb, var(--watch) 30%, transparent) 6px 9px);
+}
+.arcText {
+  margin: 12px 0 0;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--text-2);
+}
+.arcText b {
+  color: var(--text);
+}
+
+/* ---------- layout ---------- */
+/* Two stacks of cards that always end level: the grid row stretches both stacks to the taller one, and the last
+   card in each stack grows to fill it, so a shorter column never leaves an empty hole. One column when there is
+   room for less than two 360px columns (phones, the docked assistant). */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+.col > :last-child {
+  flex: 1;
+}
+.note {
+  margin: 10px 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--text-2);
+}
+
+/* ---------- momentum ---------- */
+.supportCard {
+  border-color: var(--watch-line);
+}
+.trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+.trend_up {
+  color: var(--ok);
+}
+.trend_down {
+  color: var(--watch);
+}
+.trend_steady {
+  color: var(--text-2);
+}
+.bars {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.barRow {
+  display: grid;
+  grid-template-columns: 104px minmax(0, 1fr) 44px;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8125rem;
+  color: var(--text-2);
+}
+.barRow b {
+  text-align: right;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+.bar {
+  height: 8px;
+  border-radius: 99px;
+  background: var(--surface-3);
+  overflow: hidden;
+}
+.bar i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--accent);
+}
+.core {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+/* ---------- quests ---------- */
+.quests {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.quest {
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--surface-2);
+}
+.questDone {
+  background: color-mix(in srgb, var(--ok) 8%, var(--surface-2));
+}
+.questTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+}
+.questTop b {
+  font-size: 0.9375rem;
+}
+.reward {
+  flex: none;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+.quest p {
+  margin: 4px 0 10px;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--text-2);
+}
+.questFoot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.pips {
+  display: inline-flex;
+  gap: 4px;
+}
+.pips i {
+  width: 18px;
+  height: 6px;
+  border-radius: 99px;
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--text-3);
+}
+.pips .pipOn {
+  background: var(--ok);
+  box-shadow: none;
+}
+.doneWord {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--ok);
+}
+
+/* ---------- calendar ---------- */
+.calendar {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 6px;
+  max-width: 420px;
+}
+/* Each cell shows its day number; the text colour is picked per status to stay readable on its fill in both themes. */
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  height: 30px;
+  border-radius: 7px;
+  background: var(--surface-2);
+  color: var(--text-3);
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.c_done {
+  background: color-mix(in srgb, var(--ok) 70%, var(--surface-2));
+  color: #1d1505;
+}
+.c_eased {
+  background: color-mix(in srgb, var(--ok) 35%, var(--surface-2));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ok) 60%, transparent);
+  color: var(--text);
+}
+.c_shielded {
+  background: var(--watch);
+  color: var(--bg);
+}
+.c_missed {
+  background: color-mix(in srgb, var(--act) 45%, var(--surface-2));
+  color: var(--text);
+}
+.c_today {
+  background: transparent;
+  box-shadow: inset 0 0 0 2px var(--accent);
+  color: var(--text);
+}
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+  margin: 10px 0 0;
+  font-size: 0.75rem;
+  color: var(--text-3);
+}
+/* Swatch and word stay together when the legend wraps */
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+.legend i {
+  display: inline-block;
+  flex: none;
+  width: 12px;
+  height: 8px;
+  border-radius: 3px;
+}
+
+/* ---------- crew operation ---------- */
+.opName {
+  margin: 0 0 10px;
+  font-size: 0.875rem;
+  color: var(--text-2);
+}
+.opName b {
+  display: block;
+  font-size: 1rem;
+  color: var(--text);
+}
+.opBar {
+  height: 10px;
+  border-radius: 99px;
+  background: var(--surface-3);
+  overflow: hidden;
+}
+.opBar i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--ok);
+}
+.opCount {
+  margin: 6px 0 12px;
+  font-size: 0.8125rem;
+  color: var(--text-3);
+  font-variant-numeric: tabular-nums;
+}
+.opCount b {
+  color: var(--text);
+}
+.team {
+  list-style: none;
+  margin: 0 0 12px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+.team li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 4px;
+  border-radius: 10px;
+  background: var(--surface-2);
+  font-size: 0.75rem;
+  color: var(--text-2);
+}
+.team b {
+  font-size: 0.9375rem;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+.versus {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-size: 0.875rem;
+}
+.versus small {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-3);
+}
+.versus b {
+  font-size: 1.125rem;
+  font-variant-numeric: tabular-nums;
+}
+.versus b small {
+  display: inline;
+  font-weight: 500;
+}
+.ahead {
+  color: var(--ok);
+}
+.behind {
+  color: var(--watch);
+}
+
+/* ---------- perks ---------- */
+.perks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.perk {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-3);
+}
+.perk b {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-2);
+}
+.perk small {
+  font-size: 0.75rem;
+}
+.perkIcon {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  flex: none;
+  border-radius: 10px;
+  background: var(--surface-2);
+}
+.perkText {
+  flex: 1;
+  min-width: 0;
+}
+.perkOn b {
+  color: var(--text);
+}
+.perkOn .perkIcon {
+  color: var(--ok);
+  background: color-mix(in srgb, var(--ok) 14%, transparent);
+}
+
+/* ---------- ledger ---------- */
+.ledger {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.ledger li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 0;
+  font-size: 0.875rem;
+}
+.ledger li + li {
+  border-top: 1px solid var(--border);
+}
+.ledger small {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-3);
+  font-variant-numeric: tabular-nums;
+}
+.ledger b {
+  flex: none;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.ledgerMore {
+  border-top: 1px solid var(--border);
+  font-size: 0.875rem;
+}
+.ledgerMore summary {
+  padding: 12px 0;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--accent);
+}
+.ledgerMore .ledger {
+  border-top: 1px solid var(--border);
+}
+.empty {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--text-3);
+}
+/* An empty XP log points at the check that would start it. */
+.emptyLog {
+  display: grid;
+  justify-items: start;
+  gap: 10px;
+}
+
+/* ---------- badges ---------- */
+.badgeGroup + .badgeGroup {
+  margin-top: 16px;
+}
+.badgeGroup h3,
+.badgeGroup h4 {
+  margin: 0 0 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.badges {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 8px;
+}
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--surface-2);
+}
+.badgeIcon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  flex: none;
+  border-radius: 50%;
+  color: var(--text-3);
+  background: var(--surface-3);
+}
+.badgeOn .badgeIcon {
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent);
+}
+.badgeText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.badgeText b {
+  font-size: 0.875rem;
+}
+.badge:not(.badgeOn) .badgeText b {
+  color: var(--text-2);
+}
+.badgeText small {
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--text-3);
+}
+.badgeBar {
+  height: 4px;
+  margin-top: 6px;
+  border-radius: 99px;
+  background: var(--surface-3);
+  box-shadow: inset 0 0 0 1px var(--text-3);
+  overflow: hidden;
+}
+.badgeBar i {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+}
+.badgeState {
+  flex: none;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-3);
+  font-variant-numeric: tabular-nums;
+}
+.badgeOn .badgeState {
+  color: var(--ok);
+}
+
+/* ---------- rules ---------- */
+.rules {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+.rules th,
+.rules td {
+  padding: 9px 10px 9px 0;
+  text-align: left;
+  vertical-align: top;
+  border-top: 1px solid var(--border);
+}
+.rules tr:first-child th,
+.rules tr:first-child td {
+  border-top: none;
+}
+.rules th {
+  font-weight: 600;
+  white-space: nowrap;
+}
+.rules td {
+  color: var(--text-2);
+}
+.ruleXp {
+  width: 64px;
+  font-weight: 700;
+  color: var(--accent) !important;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.ruleZero th,
+.ruleZero .ruleXp {
+  color: var(--ok) !important;
+}
+.why {
+  margin-top: 12px;
+  font-size: 0.875rem;
+}
+.why summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--accent);
+}
+.why ul {
+  margin: 10px 0 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  line-height: 1.55;
+  color: var(--text-2);
+}
+
+/* ---------- Progress on a profile (the game lives with the person) ---------- */
+.progress {
+  margin-top: 16px;
+  scroll-margin-top: calc(var(--topbar, 56px) + 16px);
+}
+.progressHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 12px;
+  margin-bottom: 10px;
+}
+.momentumNote {
+  margin: 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-size: 0.8125rem;
+  color: var(--text-2);
+}
+.progressGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
+  gap: 16px;
+  align-items: start;
+}
+/* Earned badges as compact chips; the closest unearned ones with their progress below. */
+.earned {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 0 12px;
+  padding: 0;
+  list-style: none;
+}
+.earned li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 30px;
+  padding: 0 10px;
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+.closest {
+  display: grid;
+  gap: 8px;
+  margin: 0 0 4px;
+  padding: 0;
+  list-style: none;
+}
+.closest li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.fold {
+  margin-top: 8px;
+  border-top: 1px solid var(--border);
+}
+.fold > summary,
+.foldCard > summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--accent);
+}
+.fold > summary {
+  padding: 12px 0 4px;
+  font-size: 0.875rem;
+}
+.fold[open] > summary {
+  margin-bottom: 8px;
+}
+.folds {
+  display: grid;
+  gap: 12px;
+  margin-top: 16px;
+}
+.foldCard > summary {
+  font-size: 0.9375rem;
+}
+.foldCard[open] > summary {
+  margin-bottom: 14px;
+}
+
+/* ---------- the crew's side, on the Crew page ---------- */
+.crewMission {
+  display: grid;
+  gap: 16px;
+  margin-top: 16px;
+}
+.crewMission .arc {
+  margin-bottom: 0;
+}
+.crewGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
+  gap: 16px;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 640px) {
+  .hero {
+    gap: 16px;
+    padding: 16px;
+  }
+  /* Phone: level on its own row, streak and today's XP side by side below it. */
+  .heroStats {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .heroLevel {
+    grid-column: 1 / -1;
+  }
+  .heroStreak {
+    padding-left: 0;
+    border-left: none;
+  }
+  .heroToday {
+    padding-left: 16px;
+  }
+  .orbitBonus {
+    margin-left: 0;
+    width: 100%;
+  }
+  .nextCheck :global(.btn) {
+    flex: 1 1 100%;
+  }
+  .team {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .introMore {
+    display: none;
+  }
+  /* Badges: two compact tiles per row (icon and progress on top, the name below); the description stays for
+     screen readers only. */
+  .badges {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .badge {
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 10px;
+  }
+  /* Scoped to the badge grid's tiles: the "closest badges" list keeps its one-row layout. */
+  .badge .badgeIcon {
+    width: 32px;
+    height: 32px;
+  }
+  .badge .badgeText {
+    order: 1;
+    flex-basis: 100%;
+  }
+  .badge .badgeText small {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .badge .badgeState {
+    margin-left: auto;
+  }
+  /* Rules: each rule becomes a stacked row (name and XP on top, the note below) instead of a squeezed table */
+  .rules,
+  .rules tbody {
+    display: block;
+  }
+  .rules tr {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 12px;
+    padding: 10px 0;
+    border-top: 1px solid var(--border);
+  }
+  .rules tr:first-child {
+    border-top: 0;
+  }
+  .rules th,
+  .rules td {
+    display: block;
+    padding: 0;
+    border: 0;
+  }
+  .rules th {
+    white-space: normal;
+  }
+  .rules .ruleXp {
+    width: auto;
+    text-align: right;
+  }
+  .rules td:last-child {
+    grid-column: 1 / -1;
+    margin-top: 2px;
+  }
+}

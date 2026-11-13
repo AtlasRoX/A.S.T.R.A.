@@ -1,0 +1,22 @@
+{
+  "name": "astra",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ASTRA - Astronaut Self-Triage & Readiness Assistant (NASA Space Apps 2026)",
+  "type": "module",
+  "scripts": {
+    "setup": "cd engine && uv sync && cd ../web && pnpm install",
+    "dev": "node scripts/dev.mjs",
+    "start": "npm run build && node scripts/dev.mjs --prod",
+    "dev:engine": "cd engine && uv run uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload",
+    "dev:web": "cd web && pnpm dev",
+    "lint": "cd web && pnpm lint && cd ../engine && uv run ruff check app tests",
+    "typecheck": "cd web && pnpm typecheck",
+    "test": "cd engine && uv run pytest -q",
+    "test:e2e": "cd web && pnpm test:e2e",
+    "build": "cd web && pnpm build",
+    "reset": "node -e \"fetch('http://127.0.0.1:8000/admin/reset',{method:'POST'}).then(r=>r.json()).then(j=>console.log('Demo reset:',j.clock.label))\"",
+    "anatomy:build": "uv run --no-project --with trimesh --with numpy --with scipy python -I -u scripts/build_anatomy.py",
+    "anatomy:optimize": "cd web && pnpm exec gltf-transform optimize ../anatomy-raw.glb public/models/astra-anatomy.glb --compress meshopt --join false --flatten false --instance false --palette false --simplify false && node scripts/lod-anatomy.mjs public/models/astra-anatomy.glb public/models/astra-anatomy.glb"
+  }
+}

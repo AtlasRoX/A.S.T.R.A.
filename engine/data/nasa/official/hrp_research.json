@@ -1,0 +1,111 @@
+{
+  "slot": "B",
+  "title": "NASA Human Research Program: ongoing research in space",
+  "url": "https://www.nasa.gov/hrp/ongoing-hrp-research/",
+  "listed_on": "https://www.spaceappschallenge.org/2026/challenges/health-monitoring-software/?tab=resources",
+  "retrieved": "2026-11-13",
+  "challenge_note": "Articles on ongoing Human Research Program research.",
+  "groups": [
+    {"id": "artemis2", "name": "Artemis II mission"},
+    {"id": "leo", "name": "Human investigations in low Earth orbit"}
+  ],
+  "studies": [
+    {
+      "id": "archer", "group": "artemis2", "name": "ARCHeR",
+      "url": "https://www.nasa.gov/reference/archer/",
+      "summary": "Artemis Research for Crew Health and Readiness: tracks crew well-being, activity and sleep (actigraphy) and behavioural-performance surveys before, during and after Artemis II.",
+      "risks": ["teamwork", "sleep", "behavioral"],
+      "astra": {"metrics": ["sleep", "mood", "exercise"],
+                "how": "ASTRA asks for the same things every day: sleep hours, a mood check-in and activity, and compares them with each astronaut's own baseline."}
+    },
+    {
+      "id": "immune_biomarkers", "group": "artemis2", "name": "Immune Biomarkers",
+      "url": "https://www.nasa.gov/reference/immune-biomarkers/",
+      "summary": "Analyses blood and saliva from the Artemis II crew to see how deep-space travel affects the immune system.",
+      "risks": ["immune"],
+      "astra": {"metrics": ["temp", "symptoms"], "link": "/data/inspiration4",
+                "how": "ASTRA watches the immune signs a crew can read on board (fever, sore throat, rash) and shows real astronaut white-cell counts from Inspiration4."}
+    },
+    {
+      "id": "artemis2_standard_measures", "group": "artemis2", "name": "Artemis II Standard Measures",
+      "url": "https://www.nasa.gov/reference/artemis-ii-standard-measures/",
+      "summary": "The Artemis II crew provided a standardized set of health data to a repository for future research.",
+      "risks": [],
+      "astra": {"metrics": [], "link": "/routine",
+                "how": "ASTRA's routine collects one standard set of checks at the same times every day, so readings stay comparable across a mission."}
+    },
+    {
+      "id": "b_complex", "group": "leo", "name": "B-Complex",
+      "url": "https://www.nasa.gov/reference/b-complex/",
+      "summary": "Tests whether a daily B-vitamin supplement can prevent or reduce eye and brain changes in spaceflight.",
+      "risks": ["sans"],
+      "astra": {"metrics": ["vision"], "how": "The weekly Amsler-grid check is how a crew member notices the vision changes this study tries to prevent."}
+    },
+    {
+      "id": "brain_fluid_pressure", "group": "leo", "name": "Brain Fluid Pressure",
+      "url": "https://www.nasa.gov/reference/brain-fluid-pressure/",
+      "summary": "Examines how pressure inside the skull relates to eye and brain changes in astronauts.",
+      "risks": ["sans"],
+      "astra": {"metrics": ["vision"], "how": "Vision self-check and headache reports."}
+    },
+    {
+      "id": "cipher", "group": "leo", "name": "CIPHER",
+      "url": "https://www.nasa.gov/reference/cipher/",
+      "summary": "A suite of studies on how many body systems change together during orbital flight.",
+      "risks": [],
+      "astra": {"metrics": [], "link": "/",
+                "how": "ASTRA's body map shows eight body systems side by side, so changes in several systems are seen together."}
+    },
+    {
+      "id": "manual_piloting", "group": "leo", "name": "Simulating Manual Piloting for Moon Landings",
+      "url": "https://www.nasa.gov/reference/simulating-manual-piloting-for-moon-landings/",
+      "summary": "Assesses whether moving between gravity levels affects astronauts' manual piloting for lunar landings.",
+      "risks": ["sensorimotor"],
+      "astra": {"metrics": ["reaction"], "how": "The reaction-time tap test gives a quick readiness signal before a demanding task."}
+    },
+    {
+      "id": "occupant_protection", "group": "leo", "name": "Spacecraft Occupant Protection",
+      "url": "https://www.nasa.gov/reference/spacecraft-occupant-protection/",
+      "summary": "Surveys crew discomfort during re-entry and combines it with spacecraft sensor data.",
+      "risks": ["dynamic_loads"],
+      "astra": {"metrics": ["symptoms"], "how": "Back pain and other symptoms are logged in the symptom check."}
+    },
+    {
+      "id": "spinal_fluid_biomarkers", "group": "leo", "name": "Spinal Fluid Biomarkers",
+      "url": "https://www.nasa.gov/reference/spinal-fluid-biomarkers/",
+      "summary": "Looks for substances in spinal fluid linked to spaceflight-related eye and brain changes.",
+      "risks": ["sans"],
+      "astra": {"metrics": ["vision"], "how": "Vision self-check."}
+    },
+    {
+      "id": "standard_measures", "group": "leo", "name": "Standard Measures",
+      "url": "https://www.nasa.gov/reference/standard-measures/",
+      "summary": "Collects a consistent set of physiological and psychological measures before, during and after flight: blood, activity and light exposure, sleep, saliva (immune), cognition, balance, strength and microbiome.",
+      "risks": ["fitness", "cardio", "sensorimotor", "immune"],
+      "astra": {"metrics": ["sleep", "reaction", "exercise", "symptoms"],
+                "how": "ASTRA's on-board versions: sleep hours, a reaction-time test for cognition, exercise minutes, dizziness in the symptom check, and real Inspiration4 blood panels."}
+    },
+    {
+      "id": "thigh_cuff", "group": "leo", "name": "Thigh Cuff",
+      "url": "https://www.nasa.gov/reference/thigh-cuff/",
+      "summary": "Tests whether tight thigh cuffs keep fluid in the legs and help prevent spaceflight eye problems.",
+      "risks": ["sans"],
+      "astra": {"metrics": ["vision"], "how": "Vision self-check; the fluid shift it fights is explained on the eyes card."}
+    },
+    {
+      "id": "venous_haemostasis", "group": "leo", "name": "Venous Haemostasis",
+      "url": "https://www.nasa.gov/reference/venous-haemostasis/",
+      "summary": "Examines differences between astronauts that may change blood flow and clotting in space.",
+      "risks": ["cardio"],
+      "astra": {"metrics": ["hr", "bp"], "how": "Heart rate and blood pressure against each astronaut's own baseline."}
+    },
+    {
+      "id": "zero_t2", "group": "leo", "name": "Zero T2",
+      "url": "https://www.nasa.gov/reference/zero-t2/",
+      "summary": "Studies how exercising without a treadmill affects health and performance ahead of deep-space missions.",
+      "risks": ["fitness", "bone"],
+      "astra": {"metrics": ["exercise"], "link": "/exercise",
+                "how": "ASTRA's exercise sessions are equipment-light, the situation Zero T2 prepares for."}
+    }
+  ]
+}

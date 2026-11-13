@@ -1,0 +1,1242 @@
+.pick {
+  max-width: 1040px;
+  margin: 0 auto;
+}
+.banner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 20px;
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  border: 1px solid var(--act-line);
+  margin-bottom: 18px;
+}
+.banner > svg {
+  color: var(--act);
+  flex: none;
+}
+.banner b {
+  display: block;
+  font-size: 20px;
+  font-weight: 600;
+}
+.bannerTitle {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+.banner span {
+  color: var(--text-2);
+  font-size: 14.5px;
+}
+
+/* Resume banner in pick mode */
+.resumeBanner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 18px 22px;
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  border: 2px solid var(--accent);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  margin-bottom: 20px;
+}
+.resumeInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.resumePill {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  width: fit-content;
+}
+.resumeTitle {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--text);
+}
+.resumeMeta {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-2);
+}
+.resumeActionGroup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Discard modal */
+.discardOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(0, 0, 0, 0.65);
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+.discardCard {
+  background: var(--surface);
+  border: 1px solid var(--border-2);
+  border-radius: var(--r-lg);
+  padding: 24px;
+  max-width: 440px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+.discardCard h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+}
+.discardCard p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-2);
+  line-height: 1.45;
+}
+.discardBtns {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.protocols {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+.protocol {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 18px;
+  border-radius: var(--r-lg);
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  text-align: left;
+  transition:
+    border-color 0.2s var(--ease),
+    transform 0.15s var(--ease),
+    background 0.2s var(--ease);
+}
+.protocol:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-3);
+}
+.protocol b {
+  font-size: 16px;
+  font-weight: 600;
+}
+.protocol small {
+  color: var(--text-2);
+  font-size: 13px;
+}
+.on {
+  border-color: var(--act);
+  background: var(--surface);
+}
+.pIcon,
+.pIconRed {
+  display: grid;
+  place-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 16px;
+  background: var(--act-soft);
+  color: var(--act);
+  flex: none;
+}
+.tick {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--act);
+  color: var(--on-act);
+}
+.modeSwitch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  /* 48px options + 3px padding + border = the 56px row height. */
+  height: auto;
+  padding: 3px;
+  border-radius: var(--r-md);
+  background: var(--surface-2);
+  border: 1px solid var(--border-2);
+}
+.modeOpt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  min-height: 48px;
+  padding: 0 12px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-3);
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  transition:
+    background 0.15s var(--ease),
+    color 0.15s var(--ease),
+    border-color 0.15s var(--ease);
+}
+.modeOpt svg {
+  flex: none;
+}
+.modeOpt span {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.2;
+}
+.modeOpt b {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-2);
+}
+.modeOpt small {
+  font-size: 0.8125rem;
+  /* Wraps rather than truncates: two lines still fit the 48px option. */
+  white-space: normal;
+}
+.modeOpt:hover:not([aria-checked='true']) {
+  color: var(--text-2);
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+}
+.modeOpt:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+/* Selected: Real reads as danger, Drill as practice. */
+.modeReal {
+  background: var(--act-soft);
+  border-color: var(--act-line);
+  color: var(--act);
+}
+.modeDrill {
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  color: var(--accent);
+}
+.modeReal b,
+.modeDrill b {
+  color: var(--text);
+}
+.modeReal small,
+.modeDrill small {
+  color: var(--text-2);
+}
+
+.startRow {
+  display: grid;
+  /* Patient | Mode | Start: one row, every control 56px tall, labels on one line above. */
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) auto;
+  gap: 8px 14px;
+  align-items: end;
+  margin-top: 18px;
+  padding: 18px;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+.patient button[aria-haspopup='listbox'] {
+  height: 56px;
+}
+.linkInfo {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin: 6px 0 0;
+  font-size: 0.8125rem;
+  color: var(--text-3);
+}
+.linkInfo svg {
+  flex: none;
+}
+.linkInfo b {
+  color: var(--text-2);
+  font-weight: 600;
+}
+.go {
+  height: 56px;
+  /* Same width for "Start protocol" and "Start drill", so the row does not shift when the mode changes. */
+  min-width: 200px;
+  padding: 0 28px;
+  font-size: 16px;
+  white-space: nowrap;
+}
+.note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 16px;
+  font-size: 12.5px;
+  color: var(--text-3);
+  text-align: center;
+}
+
+/* ====================================================================
+   RUN MODE: Calm, full-screen, one-step-at-a-time guide
+   ==================================================================== */
+.runContainer {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  width: 100vw;
+  color: var(--text);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Red header band */
+.redBand {
+  background: var(--emergency, #b42318);
+  color: #ffffff;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.25);
+  flex: none;
+}
+.redBandMain {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.redBandPillRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.redBandPill {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.emergencyPill {
+  background: rgba(0, 0, 0, 0.35);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+.drillPill {
+  background: #ffffff;
+  color: var(--emergency, #b42318);
+  border: 1px solid #ffffff;
+}
+.redBandPatient {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.92);
+}
+.redBandPatient b {
+  color: #ffffff;
+}
+.redBandTitle {
+  margin: 0;
+  font-size: clamp(20px, 2.8vw, 28px);
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+.redBandTimer {
+  text-align: right;
+  background: rgba(0, 0, 0, 0.22);
+  padding: 6px 14px;
+  border-radius: var(--r-md);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+}
+.timerOverline {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.85);
+}
+.timerValue {
+  font-family: var(--font-code);
+  font-size: clamp(24px, 3.5vw, 36px);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.1;
+}
+
+/* Step content area */
+.stepContentArea {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-width: 860px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 16px 20px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-sizing: border-box;
+}
+
+/* Docked bottom zone */
+.bottomDock {
+  /* Anchors the confirm sheet, which opens above the dock. */
+  position: relative;
+  flex: none;
+  background: var(--surface);
+  border-top: 1px solid var(--border-2);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 -8px 24px -4px rgba(0, 0, 0, 0.4);
+  z-index: 20;
+}
+
+/* Track choice segmented control */
+.trackChoiceWrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.trackChoiceLabel {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-2);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.trackSegmented {
+  /* Equal columns: long labels wrap inside their option instead of overflowing the card. */
+  flex: 1 1 280px;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: 6px;
+  background: var(--surface-2);
+  padding: 4px;
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
+}
+.trackSegmentBtn {
+  min-height: 48px;
+  padding: 8px 12px;
+  border-radius: var(--r-sm);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-2);
+  font-size: 16px;
+  line-height: 1.25;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.trackSegmentBtn:hover {
+  color: var(--text);
+}
+.trackSegmentActive {
+  background: var(--surface);
+  color: var(--text);
+  border-color: var(--border-3);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+/* Chosen situation after the branch step: tap to go back to the choice. */
+.trackChip {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 6px;
+  min-height: 48px;
+  padding: 6px 14px;
+  border-radius: var(--r-md);
+  border: 1px solid var(--border-2);
+  background: var(--surface-2);
+  color: var(--text);
+  font-size: 15px;
+  text-align: left;
+  cursor: pointer;
+}
+.trackChip:hover {
+  border-color: var(--border-3);
+}
+.trackChipLabel {
+  color: var(--text-2);
+}
+.trackChipChange {
+  margin-left: 6px;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Current single step card */
+.activeStepCard {
+  background: var(--surface);
+  border: 1.5px solid var(--border-2);
+  border-radius: var(--r-lg);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+.stepMetaRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.stepCounter {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-3);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.stepDoneBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ok);
+  background: var(--ok-soft);
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--ok-line);
+}
+.currentStepHeading {
+  font-size: clamp(22px, 3.2vw, 28px);
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--text);
+  margin: 0;
+  outline: none;
+}
+.currentStepHeading:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: var(--r-sm);
+}
+.currentStepDetail {
+  font-size: clamp(16px, 2vw, 18px);
+  line-height: 1.55;
+  color: var(--text-2);
+  margin: 0;
+}
+.reopenRow {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 4px;
+}
+.reopenBtn {
+  min-height: 48px;
+  gap: 8px;
+  color: var(--text-2);
+}
+
+/* Diagram wrap */
+.stepDiagramWrap {
+  margin-top: 8px;
+}
+.cprCard {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 16px;
+}
+.cprSvg {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  display: block;
+  margin: 10px auto;
+}
+.cprSvg text {
+  fill: var(--text-2);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+.cprWall {
+  stroke: var(--text-3);
+  stroke-width: 2;
+}
+.cprFigure {
+  stroke: var(--text);
+  stroke-width: 3.2;
+  stroke-linecap: round;
+  fill: none;
+}
+.cprPatientLine {
+  stroke: var(--act);
+  stroke-width: 3.2;
+  stroke-linecap: round;
+  fill: none;
+}
+.cprHeadRed {
+  fill: var(--act);
+}
+.cprHeadFig {
+  fill: var(--text);
+}
+.cprArrow {
+  stroke: var(--accent);
+  stroke-width: 1.8;
+  fill: none;
+}
+.cprCaption {
+  font-size: 13.5px;
+  color: var(--text-2);
+  margin: 8px 0 0;
+  line-height: 1.45;
+}
+.cprCaption b {
+  color: var(--text);
+}
+
+/* Metronome */
+.metronomeWrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 6px 0;
+}
+.metronomeBtn,
+.metronomeActive {
+  min-height: 48px;
+  padding: 8px 16px;
+  border-radius: var(--r-md);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.metronomeBtn {
+  background: var(--surface-2);
+  border: 1px solid var(--border-2);
+  color: var(--text);
+}
+.metronomeBtn:hover {
+  border-color: var(--accent);
+}
+.metronomeActive {
+  background: var(--accent-soft, rgba(134, 169, 245, 0.15));
+  border: 1.5px solid var(--accent);
+  color: var(--text);
+}
+.beatIndicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  transition: transform 0.08s ease, opacity 0.08s ease;
+}
+.cueSource {
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+/* Collapsible done steps */
+.doneCollapsibleCard {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  overflow: hidden;
+}
+.doneCollapsibleHeader {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+  border: none;
+  color: var(--text-2);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.doneCollapsibleHeader:hover {
+  color: var(--text);
+}
+.doneStepsList {
+  list-style: none;
+  margin: 0;
+  padding: 0 12px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.doneStepItem {
+  width: 100%;
+  min-height: 48px;
+  padding: 8px 12px;
+  border-radius: var(--r-sm);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  cursor: pointer;
+}
+.doneStepItem:hover {
+  border-color: var(--border-3);
+}
+.doneStepActive {
+  border-color: var(--accent);
+}
+.doneStepTime {
+  font-family: var(--font-code);
+  font-size: 12px;
+  color: var(--ok);
+  flex: none;
+}
+.doneStepTitle {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text);
+  flex: 1;
+}
+.doneStepReopen {
+  font-size: 12px;
+  color: var(--text-3);
+  flex: none;
+}
+
+/* Big Actions Row (64px, thumb zone) */
+.actionRow {
+  max-width: 860px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 10px 20px 8px;
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 14px;
+  box-sizing: border-box;
+  flex: none;
+}
+.navBackBtn,
+.navDoneBtn {
+  height: 64px;
+  min-height: 64px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: var(--r-md);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.navBackBtn {
+  border: 1.5px solid var(--border-2);
+  color: var(--text);
+}
+.navBackBtn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+.navDoneBtn {
+  box-shadow: 0 4px 16px rgba(180, 35, 24, 0.35);
+}
+
+/* Earth Bar at bottom */
+.earthBar {
+  background: transparent;
+  border-top: 1px solid var(--border);
+  /* Same centred column as the steps and Back/Done, so the hold button is not stranded on wide screens. */
+  max-width: 860px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 10px 20px;
+  padding-bottom: max(10px, env(safe-area-inset-bottom));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  flex: none;
+}
+.earthInfoCol {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.earthTimersRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  color: var(--text);
+  flex-wrap: wrap;
+}
+.earthTimersRow b {
+  font-family: var(--font-code);
+  color: var(--text);
+}
+.dotSep {
+  color: var(--text-3);
+}
+.earthTransmissionStatus {
+  font-size: 14px;
+  color: var(--text-3);
+  font-family: var(--font-code);
+}
+.earthActionArea {
+  display: flex;
+  align-items: center;
+}
+
+/* Hold-to-end button */
+.holdBtn {
+  min-height: 48px;
+  padding: 8px 16px;
+  border-radius: var(--r-md);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  border: 1px solid var(--border-2);
+}
+.ringSvg {
+  transform: rotate(-90deg);
+  flex: none;
+}
+.ringBg {
+  fill: none;
+  stroke: var(--border-2);
+  stroke-width: 3.5;
+}
+.ringFill {
+  fill: none;
+  stroke: var(--act);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.05s linear;
+}
+.holdText {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Confirm sheet: drawn above the dock (bottom: 100%), so nothing in the dock moves when it opens. */
+.confirmBox {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  padding: 14px 20px;
+  background: var(--surface-2);
+  border-top: 2px solid var(--act-line);
+  box-shadow: 0 -10px 28px -6px rgba(0, 0, 0, 0.45);
+}
+.confirmInner {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+}
+.confirmPromptText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 17px;
+  color: var(--text);
+}
+.confirmSub {
+  font-size: 15px;
+  color: var(--text-2);
+}
+.confirmBtnGroup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.confirmBtnGroup :global(.btn) {
+  min-height: 56px;
+  padding: 0 22px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* ====================================================================
+   DONE SCREEN
+   ==================================================================== */
+.done {
+  max-width: 640px;
+  margin: 24px auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 32px;
+}
+.done h2 {
+  font-size: 24px;
+  font-weight: 600;
+}
+.doneIcon {
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--ok-soft);
+  color: var(--ok);
+}
+.timeline {
+  list-style: none;
+  margin: 8px 0;
+  padding: 0;
+  width: 100%;
+  text-align: left;
+  display: grid;
+  gap: 6px;
+}
+.timeline li {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: var(--surface-2);
+  font-size: 16px;
+}
+.timeline :global(.num) {
+  color: var(--text-3);
+}
+.doneNote {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--text-2);
+}
+.done :global(.btn) {
+  min-height: 48px;
+}
+
+/* ====================================================================
+   RESPONSIVE BREAKPOINTS
+   ==================================================================== */
+@media (max-width: 980px) {
+  .protocols {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .startRow {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+    gap: 10px;
+    position: sticky;
+    bottom: 0;
+    z-index: 30;
+    background: var(--surface);
+    border-top: 1px solid var(--border-2);
+    box-shadow: 0 -8px 24px -4px rgba(0, 0, 0, 0.4);
+    margin-bottom: 0;
+  }
+  /* Stacked: the spacer label above Start only exists to align the desktop row. */
+  .startRow .field > [aria-hidden='true'] {
+    display: none;
+  }
+}
+
+/* Tablet widths: Patient | Mode side by side and Start full width below, so the sticky panel stays
+   short. (Start on the same row leaves the Real/Drill hints too narrow to read.) */
+@media (min-width: 640px) and (max-width: 980px) {
+  .startRow {
+    grid-template-columns: 1fr 1fr;
+  }
+  .goField {
+    grid-column: 1 / -1;
+  }
+}
+
+/* While the panel is sticky, keep it short: the Earth-delay line stays on wide or short screens. */
+@media (max-width: 980px) and (min-height: 561px) {
+  .linkInfo {
+    display: none;
+  }
+}
+
+/* Short screens (phone landscape): a sticky panel would cover the protocol cards. */
+@media (max-height: 560px) {
+  .startRow {
+    position: static;
+    box-shadow: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .redBand {
+    padding: 12px 16px;
+    /* Timer stays beside the title instead of wrapping to its own row. */
+    flex-wrap: nowrap;
+  }
+  .redBandMain {
+    flex: 1;
+    min-width: 0;
+  }
+  .timerValue {
+    font-size: 24px;
+  }
+  .redBandTitle {
+    font-size: 20px;
+  }
+  .stepContentArea {
+    padding: 16px 16px 8px;
+    gap: 12px;
+  }
+  .activeStepCard {
+    padding: 18px 16px;
+  }
+  .actionRow {
+    grid-template-columns: 100px 1fr;
+    padding: 6px 16px 10px;
+  }
+  .navBackBtn,
+  .navDoneBtn {
+    height: 56px;
+    min-height: 56px;
+    font-size: 16px;
+  }
+  .earthBar {
+    padding: 10px 16px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .earthActionArea {
+    width: 100%;
+  }
+  .holdBtn {
+    width: 100%;
+    justify-content: center;
+  }
+  .confirmBox {
+    padding: 14px 16px;
+  }
+  .confirmInner {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  /* Yes on the left, Keep running on the right (thumb side), both full height. */
+  .confirmBtnGroup {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .protocols {
+    grid-template-columns: 1fr 1fr;
+  }
+  .protocol {
+    padding: 14px;
+  }
+  /* Two columns: the names carry the choice, so all four fit above the sticky start panel. */
+  .protocol small {
+    display: none;
+  }
+  .pIcon {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Narrow phones: drop the mode icons so both hints fit. */
+@media (max-width: 480px) {
+  .modeOpt svg {
+    display: none;
+  }
+  /* Red band: pill and timer share the first row, so the patient and the title get the full width
+     instead of wrapping beside the timer. */
+  .redBand {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 4px 12px;
+  }
+  .redBandMain,
+  .redBandPillRow {
+    display: contents;
+  }
+  .redBandPill {
+    grid-area: 1 / 1;
+    justify-self: start;
+  }
+  .redBandTimer {
+    grid-area: 1 / 2;
+    padding: 2px 10px;
+  }
+  /* "T+" already marks elapsed time. */
+  .timerOverline {
+    display: none;
+  }
+  .redBandPatient {
+    grid-area: 2 / 1 / 3 / -1;
+  }
+  .redBandTitle {
+    grid-area: 3 / 1 / 4 / -1;
+  }
+  /* Sans keeps the transmission line on one row on phones. */
+  .earthTransmissionStatus {
+    font-family: inherit;
+  }
+}
+
+/* Short screens (phone landscape): compact band and a one-row dock, so the step title and the first
+   instruction lines are visible without scrolling. Placed last so it wins over the width queries. */
+@media (max-height: 500px) {
+  .redBand {
+    padding: 6px 16px;
+    flex-wrap: nowrap;
+    gap: 12px;
+  }
+  .redBandMain {
+    flex: 1;
+    min-width: 0;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+  /* Keep the drill/emergency pill; the patient is named on the picker and the result. */
+  .redBandPatient {
+    display: none;
+  }
+  .redBandTitle {
+    min-width: 0;
+    font-size: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .redBandTimer {
+    padding: 2px 10px;
+  }
+  .timerOverline {
+    display: none;
+  }
+  .timerValue {
+    font-size: 22px;
+  }
+  .stepContentArea {
+    padding: 8px 16px;
+    gap: 8px;
+  }
+  .activeStepCard {
+    padding: 12px 16px;
+    gap: 8px;
+  }
+  .currentStepHeading {
+    font-size: 20px;
+  }
+  .bottomDock {
+    flex-direction: row;
+    align-items: center;
+  }
+  .actionRow {
+    flex: 1;
+    max-width: none;
+    margin: 0;
+    grid-template-columns: 100px 1fr;
+    padding: 6px 12px 6px 16px;
+    padding-bottom: max(6px, env(safe-area-inset-bottom));
+  }
+  .navBackBtn,
+  .navDoneBtn {
+    height: 52px;
+    min-height: 52px;
+    font-size: 16px;
+  }
+  .earthBar {
+    width: auto;
+    max-width: none;
+    margin: 0;
+    border-top: 0;
+    flex-direction: row;
+    padding: 6px 16px 6px 0;
+    padding-bottom: max(6px, env(safe-area-inset-bottom));
+  }
+  .earthInfoCol {
+    display: none;
+  }
+  .earthActionArea {
+    width: auto;
+  }
+  .holdBtn {
+    width: auto;
+    min-height: 52px;
+  }
+  .confirmBox {
+    padding: 10px 16px;
+  }
+  .confirmInner {
+    flex-direction: row;
+    align-items: center;
+  }
+}
