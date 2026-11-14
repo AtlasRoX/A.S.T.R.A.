@@ -13,9 +13,10 @@ import {
   postAttentionAck,
   postAttentionResolve,
   postPerkApprove,
+  postCrewWatchRun,
 } from '@/lib/engine';
 import { CREW_COOKIE, ENV_COOKIE, getSession, isCrewId, isEnvId } from '@/lib/session';
-import type { ActionResult, Evaluation, Packet, ReadingInput, SaveResult, SimLiveStatus } from '@/lib/types';
+import type { CrewWatchRun, ActionResult, Evaluation, Packet, ReadingInput, SaveResult, SimLiveStatus } from '@/lib/types';
 
 const YEAR = 60 * 60 * 24 * 365;
 
@@ -112,5 +113,13 @@ export async function resolveAttention(
   const { crew } = await getSession();
   const res = await run(() => postAttentionResolve(key, crew, note));
   if (res.ok) revalidatePath('/', 'layout');
+  return res;
+}
+
+/** Run ASTRA's on-board Crew Watch agent once. */
+export async function runCrewWatch(): Promise<ActionResult<CrewWatchRun>> {
+  const { env } = await getSession();
+  const res = await run(() => postCrewWatchRun(env));
+  if (res.ok) revalidatePath('/crew');
   return res;
 }

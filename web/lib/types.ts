@@ -1067,3 +1067,24 @@ export type OfficialResources =
       };
       sources: NasaSource[];
     };
+
+export type AgentPhase = 'sense' | 'check' | 'decide' | 'act';
+export interface AgentStep {
+  n: number;
+  phase: AgentPhase;
+  tool: string;
+  summary: string;
+  status: 'ok' | 'watch' | 'act';
+}
+export interface CrewWatchRun {
+  agent: 'crew_watch';
+  env_id: string;
+  met_s: number;
+  on_board: boolean;
+  network_used: boolean;
+  delay_label: string;
+  elapsed_ms: number;
+  steps: AgentStep[];
+  decision: { cause: 'habitat' | 'individual'; severity: 'ok' | 'watch' | 'act'; title: string; body: string; actions: string[] } | null;
+  handover: { live: boolean; one_way_label: string; round_trip_label: string; text: string } | null;
+}

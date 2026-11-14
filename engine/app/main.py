@@ -16,7 +16,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, StreamingResponse
 from pydantic import BaseModel, Field
 
-from . import assistant
+from . import agent, assistant
 from .catalog import public_catalog
 from .live_sim import LiveSimulatorRunner
 from .nasa import Registry, RegistryError
@@ -312,6 +312,14 @@ def create_app(db_path: str = DB_PATH) -> FastAPI:
         history = [t.model_dump() for t in body.history]
         return StreamingResponse(assistant.chat(engine, body.crew_id, body.env, body.question, history, body.page),
                                  media_type="application/x-ndjson")
+
+    @app.post("/agent/crew-watch/run")
+    def agent_run(env: str | None = None) -> dict[str, Any]:
+        return agent.run(engine, env)
+
+    @app.get("/agent/crew-watch")
+    def agent_last() -> dict[str, Any]:
+        return {"last": agent.last(engine)}
 
     @app.get("/crew/{crew_id}/exercise")
     def exercise(crew_id: str, env: str | None = None) -> dict[str, Any]:

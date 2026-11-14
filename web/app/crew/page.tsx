@@ -4,10 +4,11 @@ import { AttentionQueue } from '@/components/attention/AttentionQueue';
 import { CommsPanel } from '@/components/crew/CommsPanel';
 import s from '@/components/crew/crew.module.css';
 import { ShipSense } from '@/components/crew/ShipSense';
+import { CrewWatch } from '@/components/crew/CrewWatch';
 import { ViewAs } from '@/components/crew/ViewAs';
 import { CrewAvatar } from '@/components/ui/CrewAvatar';
 import { CrewMission } from '@/components/missions/CrewMission';
-import { getAttention, getCatalog, getCrewOverview, getGame } from '@/lib/engine';
+import { getAttention, getCatalog, getCrewOverview, getCrewWatch, getGame } from '@/lib/engine';
 import { cx } from '@/lib/format';
 import { getSession } from '@/lib/session';
 
@@ -24,11 +25,12 @@ const SEVERITY = { act: 0, watch: 1, ok: 2 } as const;
 
 export default async function CrewPage() {
   const { crew, env } = await getSession();
-  const [catalog, data, attentionData, g] = await Promise.all([
+  const [catalog, data, attentionData, g, watch] = await Promise.all([
     getCatalog(),
     getCrewOverview(env),
     getAttention(undefined, env),
     getGame(crew, env),
+    getCrewWatch(),
   ]);
   const label = (id: string) => catalog.metrics.find((m) => m.id === id)?.short ?? id;
   const cmo = catalog.crew.find((c) => c.is_cmo);
@@ -48,6 +50,9 @@ export default async function CrewPage() {
 
       {/* Ship Sense: a shared cause (the cabin air) behind symptoms several crew report, before separate patients */}
       <ShipSense sense={data.ship_sense} crew={catalog.crew} />
+
+      {/* Crew Watch: the on-board agent that links symptoms to causes and writes the handover to Earth */}
+      <CrewWatch initial={watch.last} />
 
       <ul className={s.roster} aria-label="Crew">
         {data.crew

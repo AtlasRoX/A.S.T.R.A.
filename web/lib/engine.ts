@@ -21,6 +21,7 @@ import type {
   ExercisePlan,
   GameHub,
   SimLiveStatus,
+  CrewWatchRun,
 } from './types';
 
 import { ENGINE_URL, engineHeaders } from './engine-url';
@@ -142,3 +143,7 @@ export const getOfficial = cache(() => request<OfficialResources>('/nasa/officia
 
 // ---------------------------------------------------------------- background telemetry (ASTRA Core runs it)
 export const getSimLiveStatus = () => request<SimLiveStatus>('/sim/live/status');
+
+export const getCrewWatch = () => request<{ last: CrewWatchRun | null }>('/agent/crew-watch');
+export const postCrewWatchRun = (env: string) =>
+  request<CrewWatchRun>(`/agent/crew-watch/run${q({ env })}`, { method: 'POST' });
