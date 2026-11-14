@@ -15,7 +15,7 @@ Built by **Team ChronoStrider** for the NASA Space Apps Challenge 2026
 [![Python](https://img.shields.io/badge/Python-3.13-3776AB?style=flat-square&logo=python&logoColor=white)](engine/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-engine-009688?style=flat-square&logo=fastapi&logoColor=white)](engine/)
 [![Next.js](https://img.shields.io/badge/Next.js-16-000000?style=flat-square&logo=nextdotjs&logoColor=white)](web/)
-[![Tests](https://img.shields.io/badge/tests-150%20passing-2EA44F?style=flat-square)](engine/tests/)
+[![Tests](https://img.shields.io/badge/tests-151%20passing-2EA44F?style=flat-square)](engine/tests/)
 [![Offline first](https://img.shields.io/badge/runs-fully%20offline-6E56CF?style=flat-square)](#real-nasa-data-shipped-on-board)
 
 [**Watch the 4-minute film**](https://www.youtube.com/watch?v=bbZLEXe4MnQ) ·
@@ -112,6 +112,17 @@ onboard assistant built on **NVIDIA Nemotron** (via NVIDIA NIM) answers crew que
 readings, history and alerts**. It never raises or clears an alert. If the model is unavailable, rule-based answers
 reply instead.
 
+### Exercise counters that fit the person
+
+Two hours a day keeps bones and muscles from wasting in low gravity, so the plan is built on NASA's **SPRINT** study:
+resistance training 3 days a week, aerobic training 3 days a week, with intervals above 90% of maximum heart rate.
+
+| | What it does | Example |
+|---|---|---|
+| **SPRINT week** | 8 exercises across 7 real devices, mapped per location | ARED, the T2 treadmill and the CEVIS cycle on the station; a compact flywheel in transit, where there is no room for them |
+| **Personal adjustments** | Each day's plan changes with medical history *and* today's readings, and always says why | A past kidney stone adds fluid; a fever means a light session; short sleep swaps intervals for steady work |
+| **Guided sessions** | An animated astronaut demonstrates each movement, with short NASA and JAXA clips | Every exercise shows its sets, reps and intensity, plus which body systems it loads |
+
 ---
 
 ## A tour
@@ -132,6 +143,10 @@ reply instead.
 <tr>
 <td><img src="docs/screenshots/resources.jpg" alt="Challenge resources" /><br/><b>Challenge resources</b>: all 17 NASA risks mapped to what ASTRA does.</td>
 <td><img src="docs/screenshots/learn.jpg" alt="Health library" /><br/><b>Health library</b>: the five hazards, body systems and indicators in plain words.</td>
+</tr>
+<tr>
+<td><img src="docs/screenshots/exercise-fold.png" alt="Exercise plan: the week ahead and today's session with the animated astronaut" /><br/><b>Exercise plan</b>: a SPRINT-based week that changes with medical history and today's readings.</td>
+<td><img src="docs/screenshots/exercise-bottom-fold.png" alt="Exercise sessions: seated row, heel raise and steady ride on the cycle ergometer" /><br/><b>Guided sessions</b>: an animated astronaut demonstrates each exercise, with NASA and JAXA clips.</td>
 </tr>
 </table>
 
@@ -212,7 +227,7 @@ Open **http://localhost:3000**. The engine's API docs are at **http://127.0.0.1:
 |---|---|
 | `npm run dev` | Engine + web with hot reload |
 | `npm start` | Production build, then engine + web: the fast way to demo |
-| `npm run test` | Engine test suite (pytest, 150 tests) |
+| `npm run test` | Engine test suite (pytest, 151 tests) |
 | `npm run lint` | oxlint for the web app, ruff for the engine |
 | `npm run typecheck` | TypeScript (`tsc --noEmit`) |
 | `npm run reset` | Reset the demo data and mission clock to Day 142, 09:12 |
@@ -259,7 +274,7 @@ astra/
 │   ├── app/official.py     the five official challenge resources and the HRP risk map
 │   ├── app/sources.py      every NASA document behind every number
 │   ├── data/nasa/          committed NASA fixtures + manifest.json
-│   └── tests/              150 tests
+│   └── tests/              151 tests
 ├── web/                    Next.js 16 (App Router), TypeScript, hand-built SVG charts, 3D body (three.js)
 ├── scripts/fetch/          downloaders for the NASA data (standard library only; run on Earth)
 └── docs/                   data decisions log, screenshots

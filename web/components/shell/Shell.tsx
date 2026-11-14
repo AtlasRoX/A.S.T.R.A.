@@ -47,8 +47,8 @@ const NAV: NavDef[] = [
 ];
 
 const isActive = (path: string, href: string) => {
-  // Exercise and the routine are opened from Today's checks, so they belong to Today.
-  if (href === '/') return path === '/' || path.startsWith('/exercise') || path.startsWith('/routine');
+  // Routine is opened from Today's checks, so it belongs to Today.
+  if (href === '/') return path === '/' || path.startsWith('/routine');
   // Library and Data are one Reference area.
   if (href === '/learn') return path.startsWith('/learn') || path.startsWith('/data');
   return path.startsWith(href);
@@ -84,6 +84,7 @@ export function Shell({
   const me = crew.find((c) => c.id === crewId) ?? crew[0];
   const emergency = path.startsWith('/emergency');
   const settingsActive = isActive(path, '/settings');
+  const exerciseActive = isActive(path, '/exercise');
 
   return (
     <div className={s.shell}>
@@ -161,6 +162,15 @@ export function Shell({
               ) : null}
             </Link>
           ) : null}
+          <Link
+            href="/exercise"
+            className={cx(s.iconBtn, s.barExercise, exerciseActive && s.on)}
+            aria-label="Exercise"
+            aria-current={exerciseActive ? 'page' : undefined}
+            title="Exercise"
+          >
+            <span className={s.exerciseIcon} aria-hidden="true" />
+          </Link>
           <ThemeToggle className={s.barTheme} />
           <Link
             href="/settings"
